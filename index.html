@@ -56,7 +56,7 @@
         .service-card {
             background: white;
             border-radius: 15px;
-            padding: 30px;
+            padding: 40px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
@@ -71,7 +71,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-radius: 20px;
-            padding: 40px;
+            padding: 50px;
             text-align: center;
             margin: 40px 0;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
@@ -124,7 +124,7 @@
         }
         
         .section-title {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: #1e40af;
             margin-bottom: 1rem;
@@ -135,7 +135,7 @@
             color: #6b7280;
             text-align: center;
             margin-bottom: 3rem;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
         }
         
         .hero-section {
@@ -160,10 +160,10 @@
         
         .form-input {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 16px 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 18px;
             transition: border-color 0.3s ease;
         }
         
@@ -185,15 +185,60 @@
         }
         
         .service-icon {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 15px;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
         }
         
         .x-logo {
             width: 24px;
             height: 24px;
             filter: invert(1);
+        }
+        
+        .large-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .contact-section {
+            padding: 100px 0;
+        }
+        
+        .package-details {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .package-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .package-item i {
+            margin-right: 15px;
+            width: 20px;
         }
     </style>
 </head>
@@ -225,7 +270,7 @@
     <section class="hero-section">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-5xl font-bold mb-6">Premier média sur l'hôtellerie de luxe en France</h2>
-            <p class="text-xl mb-8 opacity-90">Depuis 2012, nous sommes la référence incontournable pour les amateurs d'hôtels de luxe avec plus de 200 000 followers qualifiés</p>
+            <p class="text-xl mb-8 opacity-90 large-text">Depuis 2012, nous sommes la référence incontournable pour les amateurs d'hôtels de luxe avec plus de 200 000 followers qualifiés sur nos plateformes. Notre expertise reconnue et notre audience engagée font de nous le partenaire idéal pour valoriser votre établissement.</p>
             <a href="#contact" class="btn-primary text-lg px-8 py-4">Collaborer avec nous</a>
         </div>
     </section>
@@ -234,7 +279,7 @@
     <section id="audience" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">Notre Audience en Chiffres</h2>
-            <p class="section-subtitle">Une communauté passionnée et ultra-qualifiée</p>
+            <p class="section-subtitle">Une communauté passionnée et ultra-qualifiée d'amateurs d'hôtellerie de luxe</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="stat-card">
@@ -289,7 +334,7 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="section-title">Retrouvez-nous sur tous nos réseaux</h2>
-            <p class="section-subtitle">Une présence forte sur toutes les plateformes</p>
+            <p class="section-subtitle">Une présence forte et authentique sur toutes les plateformes digitales</p>
             
             <div class="flex justify-center space-x-8">
                 <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg hover-scale">
@@ -312,22 +357,22 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">N°1 sur Google</h2>
-            <p class="section-subtitle">Domination totale des recherches hôtelières de luxe</p>
+            <p class="section-subtitle">Domination totale des recherches hôtelières de luxe avec une autorité SEO exceptionnelle</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                <div class="bg-blue-50 p-8 rounded-lg text-center">
                     <div class="text-4xl font-bold text-blue-600 mb-2">#1</div>
                     <h3 class="text-lg font-semibold mb-2">"magazine hotels"</h3>
                     <p class="text-gray-600">593 000 000 résultats</p>
                 </div>
                 
-                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                <div class="bg-blue-50 p-8 rounded-lg text-center">
                     <div class="text-4xl font-bold text-blue-600 mb-2">#1</div>
                     <h3 class="text-lg font-semibold mb-2">"magazine hotels de luxe"</h3>
                     <p class="text-gray-600">4 580 000 résultats</p>
                 </div>
                 
-                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                <div class="bg-blue-50 p-8 rounded-lg text-center">
                     <div class="text-4xl font-bold text-blue-600 mb-2">#2</div>
                     <h3 class="text-lg font-semibold mb-2">"actualité hotels de luxe"</h3>
                     <p class="text-gray-600">17 200 000 résultats</p>
@@ -338,12 +383,12 @@
                 <h3 class="text-2xl font-bold mb-4 text-center">Ce que cela signifie pour vous</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <h4 class="font-semibold mb-2">Visibilité maximale</h4>
-                        <p class="text-gray-600">Votre hôtel bénéficie de notre autorité SEO exceptionnelle sur des millions de recherches mensuelles.</p>
+                        <h4 class="font-semibold mb-2 text-lg">Visibilité maximale</h4>
+                        <p class="text-gray-600 large-text">Votre hôtel bénéficie de notre autorité SEO exceptionnelle sur des millions de recherches mensuelles. Chaque mention de votre établissement profite de notre référencement naturel premium.</p>
                     </div>
                     <div>
-                        <h4 class="font-semibold mb-2">Crédibilité renforcée</h4>
-                        <p class="text-gray-600">Être associé au leader du secteur renforce immédiatement la réputation de votre établissement et booste vos réservations à court, moyen et long terme.</p>
+                        <h4 class="font-semibold mb-2 text-lg">Crédibilité renforcée</h4>
+                        <p class="text-gray-600 large-text">Être associé au leader du secteur renforce immédiatement la réputation de votre établissement et booste vos réservations à court, moyen et long terme grâce à notre expertise reconnue.</p>
                     </div>
                 </div>
             </div>
@@ -354,42 +399,77 @@
     <section id="services" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">Nos Services</h2>
-            <p class="section-subtitle">Une gamme complète pour maximiser votre visibilité</p>
+            <p class="section-subtitle">Une gamme complète de solutions sur mesure pour maximiser votre visibilité</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 <div class="service-card hover-scale">
                     <div class="text-center">
                         <i class="fab fa-instagram service-icon text-pink-500"></i>
-                        <h3 class="text-xl font-bold mb-3">Post Instagram</h3>
-                        <p class="text-gray-600 mb-4">Publication dédiée à votre établissement avec photos professionnelles</p>
-                        <div class="text-2xl font-bold text-blue-600">1 000€</div>
+                        <h3 class="text-2xl font-bold mb-4">Post Instagram</h3>
+                        <p class="text-gray-600 mb-6 large-text">Publication dédiée à votre établissement avec photos professionnelles haute qualité, storytelling captivant et hashtags optimisés pour toucher notre audience qualifiée.</p>
+                        <div class="text-3xl font-bold text-blue-600">500€</div>
                     </div>
                 </div>
                 
                 <div class="service-card hover-scale">
                     <div class="text-center">
                         <i class="fab fa-tiktok service-icon text-black"></i>
-                        <h3 class="text-xl font-bold mb-3">Vidéo TikTok</h3>
-                        <p class="text-gray-600 mb-4">Contenu vidéo viral mettant en avant votre hôtel</p>
-                        <div class="text-2xl font-bold text-blue-600">1 500€</div>
+                        <h3 class="text-2xl font-bold mb-4">Vidéo TikTok</h3>
+                        <p class="text-gray-600 mb-6 large-text">Contenu vidéo viral créatif mettant en avant les aspects uniques de votre hôtel, avec montage professionnel et optimisation pour l'algorithme TikTok.</p>
+                        <div class="text-3xl font-bold text-blue-600">750€</div>
                     </div>
                 </div>
                 
                 <div class="service-card hover-scale">
                     <div class="text-center">
                         <i class="fas fa-newspaper service-icon text-blue-500"></i>
-                        <h3 class="text-xl font-bold mb-3">Article sur notre site</h3>
-                        <p class="text-gray-600 mb-4">Revue détaillée et professionnelle de votre établissement</p>
-                        <div class="text-2xl font-bold text-blue-600">1 000€</div>
+                        <h3 class="text-2xl font-bold mb-4">Article sur notre site</h3>
+                        <p class="text-gray-600 mb-6 large-text">Revue détaillée et professionnelle de votre établissement, SEO optimisée, avec photos exclusives et analyse approfondie de l'expérience client.</p>
+                        <div class="text-3xl font-bold text-blue-600">500€</div>
                     </div>
                 </div>
             </div>
             
             <div class="package-card hover-scale">
-                <i class="fas fa-star text-4xl mb-4"></i>
-                <h3 class="text-2xl font-bold mb-4">Package Complet</h3>
-                <p class="text-lg mb-6">Article + Instagram + TikTok + Stories + LinkedIn + X pour une visibilité maximale</p>
-                <div class="text-4xl font-bold">3 000€</div>
+                <i class="fas fa-star text-5xl mb-6"></i>
+                <h3 class="text-3xl font-bold mb-6">Package Complet Premium</h3>
+                <p class="text-xl mb-6">La solution tout-en-un pour une visibilité maximale sur tous nos canaux</p>
+                
+                <div class="package-details">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                        <div>
+                            <div class="package-item">
+                                <i class="fas fa-newspaper"></i>
+                                <span>Article complet sur notre site web</span>
+                            </div>
+                            <div class="package-item">
+                                <i class="fab fa-instagram"></i>
+                                <span>Post Instagram avec stories</span>
+                            </div>
+                            <div class="package-item">
+                                <i class="fab fa-tiktok"></i>
+                                <span>Vidéo TikTok professionnelle</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="package-item">
+                                <i class="fab fa-linkedin"></i>
+                                <span>Publication LinkedIn B2B</span>
+                            </div>
+                            <div class="package-item">
+                                <i class="fab fa-twitter"></i>
+                                <span>Posts sur X (Twitter)</span>
+                            </div>
+                            <div class="package-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Rapport de performance détaillé</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-5xl font-bold mt-8">1 500€</div>
+                <p class="text-lg mt-4 opacity-90">Économisez 40% par rapport aux services individuels</p>
             </div>
         </div>
     </section>
@@ -398,31 +478,35 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">Campagnes Publicitaires</h2>
-            <p class="section-subtitle">Sponsorisez directement sur notre site web</p>
+            <p class="section-subtitle">Sponsorisez directement sur notre site web avec des emplacements premium</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 <div class="ad-example">
-                    <h3 class="text-lg font-semibold mb-4">Exemple : Bannière Expedia</h3>
+                    <h3 class="text-xl font-semibold mb-4">Exemple : Bannière Expedia</h3>
                     <img src="https://i.ibb.co/qMgzmyR2/Capture-d-e-cran-2025-07-18-a-15-24-32.png" alt="Exemple bannière publicitaire" class="w-full rounded-lg">
+                    <p class="text-gray-600 mt-4 large-text">Bannière intégrée de manière native dans notre contenu, garantissant une visibilité optimale auprès de nos 16 200 visiteurs mensuels.</p>
                 </div>
                 
                 <div class="space-y-6">
                     <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-lg mb-2">Top Ads (Mobile + Desktop)</h3>
-                        <p class="text-gray-600 mb-2">Format : 970 x 90 pixels</p>
-                        <div class="text-2xl font-bold text-blue-600">200€/mois</div>
+                        <h3 class="font-bold text-xl mb-2">Top Ads (Mobile + Desktop)</h3>
+                        <p class="text-gray-600 mb-2">Format : 970 x 90 pixels - Position premium</p>
+                        <p class="text-gray-600 mb-4 large-text">Emplacement le plus visible, en haut de page, garantissant une exposition maximale à tous nos visiteurs.</p>
+                        <div class="text-3xl font-bold text-blue-600">200€/mois</div>
                     </div>
                     
                     <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-lg mb-2">Mid Ads (Mobile + Desktop)</h3>
-                        <p class="text-gray-600 mb-2">Format : 970 x 90 pixels</p>
-                        <div class="text-2xl font-bold text-blue-600">100€/mois</div>
+                        <h3 class="font-bold text-xl mb-2">Mid Ads (Mobile + Desktop)</h3>
+                        <p class="text-gray-600 mb-2">Format : 970 x 90 pixels - Position intermédiaire</p>
+                        <p class="text-gray-600 mb-4 large-text">Intégration native au milieu du contenu, idéale pour capter l'attention pendant la lecture.</p>
+                        <div class="text-3xl font-bold text-blue-600">100€/mois</div>
                     </div>
                     
                     <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-lg mb-2">Side Ads (Desktop)</h3>
-                        <p class="text-gray-600 mb-2">Format : carré</p>
-                        <div class="text-2xl font-bold text-blue-600">50€/mois</div>
+                        <h3 class="font-bold text-xl mb-2">Side Ads (Desktop)</h3>
+                        <p class="text-gray-600 mb-2">Format : carré - Barre latérale</p>
+                        <p class="text-gray-600 mb-4 large-text">Présence constante en sidebar, parfaite pour le branding et la reconnaissance de marque.</p>
+                        <div class="text-3xl font-bold text-blue-600">50€/mois</div>
                     </div>
                 </div>
             </div>
@@ -433,7 +517,7 @@
     <section id="temoignages" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">Ils nous font confiance</h2>
-            <p class="section-subtitle">Nos partenaires prestigieux</p>
+            <p class="section-subtitle">Nos partenaires prestigieux qui ont bénéficié de notre expertise</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="testimonial-card hover-scale">
@@ -447,6 +531,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
+                    <p class="text-sm text-gray-600 mb-3 large-text">Collaboration complète avec excellent retour sur investissement.</p>
                     <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
                 </div>
                 
@@ -461,6 +546,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
+                    <p class="text-sm text-gray-600 mb-3 large-text">Partenariat stratégique avec forte visibilité digitale.</p>
                     <a href="https://larevuedeshotels.com/avis-honnete-hotel-du-collectionneur-paris" target="_blank" class="text-blue-600 hover:underline">Lire l'article</a>
                 </div>
                 
@@ -475,6 +561,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
+                    <p class="text-sm text-gray-600 mb-3 large-text">Collaboration fructueuse avec impact mesurable.</p>
                     <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
                 </div>
                 
@@ -489,7 +576,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="text-sm text-green-600 mb-2">Plus de 170K vues sur TikTok</p>
+                    <p class="text-sm text-green-600 mb-2 font-semibold">Plus de 170K vues sur TikTok</p>
+                    <p class="text-sm text-gray-600 mb-3 large-text">Succès viral international avec retombées exceptionnelles.</p>
                     <a href="https://www.tiktok.com/@larevuedeshotels/video/7491294774830419222" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
                 </div>
             </div>
@@ -500,31 +588,31 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">ROI & Avantages pour nos Partenaires</h2>
-            <p class="section-subtitle">Des résultats mesurables et une visibilité exceptionnelle</p>
+            <p class="section-subtitle">Des résultats mesurables et une visibilité exceptionnelle avec un retour sur investissement prouvé</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chart-line text-blue-600 text-2xl"></i>
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-line text-blue-600 text-3xl"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Notoriété instantanée</h3>
-                    <p class="text-gray-600">Exposition auprès de plus de 200 000 passionnés d'hôtellerie de luxe</p>
+                    <h3 class="font-bold text-xl mb-4">Notoriété instantanée</h3>
+                    <p class="text-gray-600 large-text">Exposition immédiate auprès de plus de 200 000 passionnés d'hôtellerie de luxe, garantissant une visibilité premium pour votre établissement.</p>
                 </div>
                 
                 <div class="text-center">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-blue-600 text-2xl"></i>
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-blue-600 text-3xl"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Audience ciblée</h3>
-                    <p class="text-gray-600">Communauté ultra-qualifiée de voyageurs premium et décideurs</p>
+                    <h3 class="font-bold text-xl mb-4">Audience ultra-ciblée</h3>
+                    <p class="text-gray-600 large-text">Communauté ultra-qualifiée de voyageurs premium, décideurs et influenceurs, avec un pouvoir d'achat élevé et une forte propension à réserver.</p>
                 </div>
                 
                 <div class="text-center">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-medal text-blue-600 text-2xl"></i>
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-medal text-blue-600 text-3xl"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Expertise validée</h3>
-                    <p class="text-gray-600">12 ans d'expérience et une réputation incontestable dans le secteur</p>
+                    <h3 class="font-bold text-xl mb-4">Expertise reconnue</h3>
+                    <p class="text-gray-600 large-text">12 ans d'expérience et une réputation incontestable dans le secteur, garantissant une crédibilité et une légitimité immédiate à votre partenariat.</p>
                 </div>
             </div>
         </div>
@@ -534,79 +622,88 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">Votre Collaboration en 3 Étapes</h2>
-            <p class="section-subtitle">Un processus simple et efficace</p>
+            <p class="section-subtitle">Un processus simple, transparent et efficace pour une collaboration réussie</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center">
-                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-                    <h3 class="font-bold text-lg mb-2">Premier échange</h3>
-                    <p class="text-gray-600">Nous discutons de vos besoins et objectifs pour définir la stratégie optimale</p>
+                    <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
+                    <h3 class="font-bold text-xl mb-4">Premier échange stratégique</h3>
+                    <p class="text-gray-600 large-text">Nous discutons en détail de vos besoins, objectifs et budget pour définir la stratégie optimale et personnalisée pour votre établissement.</p>
                 </div>
                 
                 <div class="text-center">
-                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-                    <h3 class="font-bold text-lg mb-2">Création du plan média</h3>
-                    <p class="text-gray-600">Élaboration et validation du plan de communication personnalisé</p>
+                    <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
+                    <h3 class="font-bold text-xl mb-4">Création du plan média</h3>
+                    <p class="text-gray-600 large-text">Élaboration et validation du plan de communication personnalisé, avec timeline détaillée et livrables précis adaptés à vos objectifs.</p>
                 </div>
                 
                 <div class="text-center">
-                    <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-                    <h3 class="font-bold text-lg mb-2">Livraison & suivi</h3>
-                    <p class="text-gray-600">Création du contenu, publication et analyse des retombées</p>
+                    <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
+                    <h3 class="font-bold text-xl mb-4">Livraison & suivi</h3>
+                    <p class="text-gray-600 large-text">Création du contenu premium, publication coordonnée sur nos plateformes et analyse détaillée des retombées avec rapport complet.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-20 bg-white">
+    <section id="contact" class="contact-section bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">Contactez-nous</h2>
-            <p class="section-subtitle">Prêt à collaborer ? Parlons de votre projet</p>
+            <p class="section-subtitle">Prêt à collaborer ? Parlons de votre projet et créons ensemble votre stratégie de visibilité</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-xl font-bold mb-6">Formulaire de contact</h3>
-                    <form class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-                            <input type="text" class="form-input" placeholder="Votre nom">
+                <div class="contact-form">
+                    <h3 class="text-2xl font-bold mb-8">Formulaire de contact</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="form-group">
+                            <label class="form-label">Nom complet</label>
+                            <input type="text" name="nom" class="form-input" placeholder="Votre nom complet" required>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input type="email" class="form-input" placeholder="votre@email.com">
+                        <div class="form-group">
+                            <label class="form-label">Email professionnel</label>
+                            <input type="email" name="email" class="form-input" placeholder="votre@email.com" required>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Hôtel/Entreprise</label>
-                            <input type="text" class="form-input" placeholder="Nom de votre établissement">
+                        <div class="form-group">
+                            <label class="form-label">Hôtel/Entreprise</label>
+                            <input type="text" name="entreprise" class="form-input" placeholder="Nom de votre établissement" required>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                            <textarea class="form-input" rows="4" placeholder="Décrivez votre projet..."></textarea>
+                        <div class="form-group">
+                            <label class="form-label">Votre projet</label>
+                            <textarea name="message" class="form-input" rows="6" placeholder="Décrivez votre projet, vos objectifs et vos besoins..." required></textarea>
                         </div>
-                        <button type="submit" class="btn-primary w-full">Envoyer le message</button>
+                        <button type="submit" class="btn-primary w-full text-xl py-4">Envoyer le message</button>
                     </form>
                 </div>
                 
                 <div>
-                    <h3 class="text-xl font-bold mb-6">Informations de contact</h3>
-                    <div class="space-y-4">
+                    <h3 class="text-2xl font-bold mb-8">Informations de contact</h3>
+                    <div class="space-y-6">
                         <div class="flex items-center">
-                            <i class="fas fa-envelope text-blue-600 mr-3"></i>
-                            <span>larevuedeshotels@gmail.com</span>
+                            <i class="fas fa-envelope text-blue-600 mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-semibold">Email professionnel</p>
+                                <p class="text-gray-600">larevuedeshotels@gmail.com</p>
+                            </div>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-globe text-blue-600 mr-3"></i>
-                            <a href="https://larevuedeshotels.com" target="_blank" class="text-blue-600 hover:underline">larevuedeshotels.com</a>
+                            <i class="fas fa-globe text-blue-600 mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-semibold">Site web</p>
+                                <a href="https://larevuedeshotels.com" target="_blank" class="text-blue-600 hover:underline">larevuedeshotels.com</a>
+                            </div>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
-                            <span>Paris, France</span>
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-semibold">Localisation</p>
+                                <p class="text-gray-600">Paris, France</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="mt-8">
-                        <h4 class="font-bold mb-4">Suivez-nous</h4>
+                    <div class="mt-10">
+                        <h4 class="font-bold mb-6 text-xl">Suivez-nous sur nos réseaux</h4>
                         <div class="flex space-x-4">
                             <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg">
                                 <i class="fab fa-instagram"></i>
@@ -631,9 +728,9 @@
     <footer class="footer">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <img src="https://larevuedeshotels.com/wp-content/uploads/2024/01/AVIS-DES-HOTELS-DE-LUXE-LA-REVUE-DES-HOTELS-INFLUENCEUR-HOTELS-INFLUENCEUR-VOYAGE.png" alt="La Revue des Hotels" class="h-16 mx-auto mb-4">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">La Revue des Hotels</h3>
-                <p class="text-gray-600 mb-6">Premier média hôtelier de luxe en France</p>
+                <img src="https://larevuedeshotels.com/wp-content/uploads/2024/01/AVIS-DES-HOTELS-DE-LUXE-LA-REVUE-DES-HOTELS-INFLUENCEUR-HOTELS-INFLUENCEUR-VOYAGE.png" alt="La Revue des Hotels" class="h-20 mx-auto mb-6">
+                <h3 class="text-3xl font-bold text-gray-900 mb-4">La Revue des Hotels</h3>
+                <p class="text-gray-600 mb-8 large-text">Premier média hôtelier de luxe en France depuis 2012</p>
                 
                 <div class="flex justify-center space-x-6 mb-8">
                     <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg">
@@ -650,7 +747,7 @@
                     </a>
                 </div>
                 
-                <p class="text-gray-500">© 2025 La Revue des Hotels. Tous droits réservés.</p>
+                <p class="text-gray-500 text-lg">© 2025 La Revue des Hotels. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
@@ -707,10 +804,26 @@
             });
         });
 
-        // Formulaire de contact
-        document.querySelector('form').addEventListener('submit', function(e) {
+        // Formulaire de contact avec envoi d'email
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Merci pour votre message ! Nous vous recontacterons très prochainement.');
+            
+            const formData = new FormData(this);
+            const nom = formData.get('nom');
+            const email = formData.get('email');
+            const entreprise = formData.get('entreprise');
+            const message = formData.get('message');
+            
+            // Créer le lien mailto
+            const subject = `Demande de collaboration - ${entreprise}`;
+            const body = `Nom: ${nom}%0D%0AEmail: ${email}%0D%0AEntreprise: ${entreprise}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            const mailtoLink = `mailto:larevuedeshotels@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Ouvrir le client email
+            window.location.href = mailtoLink;
+            
+            // Afficher un message de confirmation
+            alert('Votre client email va s\'ouvrir. Merci pour votre message ! Nous vous recontacterons très prochainement.');
         });
     </script>
 </body>
