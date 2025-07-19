@@ -653,74 +653,90 @@
             <h2 class="section-title">Contactez-nous</h2>
             <p class="section-subtitle">Prêt à collaborer ? Parlons de votre projet et créons ensemble votre stratégie de visibilité</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="contact-form">
-                    <h3 class="text-2xl font-bold mb-8">Formulaire de contact</h3>
-                    <form id="contactForm" class="space-y-6">
+            <!-- Informations de contact en haut -->
+            <div class="bg-gray-50 rounded-lg p-8 mb-12">
+                <h3 class="text-2xl font-bold mb-8 text-center">Informations de contact</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-envelope text-blue-600 mb-4 text-3xl"></i>
+                        <p class="font-semibold text-lg">Email professionnel</p>
+                        <p class="text-gray-600">larevuedeshotels@gmail.com</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-globe text-blue-600 mb-4 text-3xl"></i>
+                        <p class="font-semibold text-lg">Site web</p>
+                        <a href="https://larevuedeshotels.com" target="_blank" class="text-blue-600 hover:underline">larevuedeshotels.com</a>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-map-marker-alt text-blue-600 mb-4 text-3xl"></i>
+                        <p class="font-semibold text-lg">Localisation</p>
+                        <p class="text-gray-600">Paris, France</p>
+                    </div>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <h4 class="font-bold mb-6 text-xl">Suivez-nous sur nos réseaux</h4>
+                    <div class="flex justify-center space-x-4">
+                        <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B4tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg">
+                            <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X" class="x-logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Formulaire de contact qui prend toute la largeur -->
+            <div class="bg-white border-2 border-gray-200 rounded-lg p-8">
+                <h3 class="text-3xl font-bold mb-8 text-center">Formulaire de contact</h3>
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="form-group">
-                            <label class="form-label">Nom complet</label>
+                            <label class="form-label">Nom complet *</label>
                             <input type="text" name="nom" class="form-input" placeholder="Votre nom complet" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Email professionnel</label>
+                            <label class="form-label">Email professionnel *</label>
                             <input type="email" name="email" class="form-input" placeholder="votre@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Hôtel/Entreprise</label>
-                            <input type="text" name="entreprise" class="form-input" placeholder="Nom de votre établissement" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Votre projet</label>
-                            <textarea name="message" class="form-input" rows="6" placeholder="Décrivez votre projet, vos objectifs et vos besoins..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary w-full text-xl py-4">Envoyer le message</button>
-                    </form>
-                </div>
-                
-                <div>
-                    <h3 class="text-2xl font-bold mb-8">Informations de contact</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-blue-600 mr-4 text-xl"></i>
-                            <div>
-                                <p class="font-semibold">Email professionnel</p>
-                                <p class="text-gray-600">larevuedeshotels@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-globe text-blue-600 mr-4 text-xl"></i>
-                            <div>
-                                <p class="font-semibold">Site web</p>
-                                <a href="https://larevuedeshotels.com" target="_blank" class="text-blue-600 hover:underline">larevuedeshotels.com</a>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-blue-600 mr-4 text-xl"></i>
-                            <div>
-                                <p class="font-semibold">Localisation</p>
-                                <p class="text-gray-600">Paris, France</p>
-                            </div>
                         </div>
                     </div>
                     
-                    <div class="mt-10">
-                        <h4 class="font-bold mb-6 text-xl">Suivez-nous sur nos réseaux</h4>
-                        <div class="flex space-x-4">
-                            <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg">
-                                <i class="fab fa-tiktok"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B4tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg">
-                                <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X" class="x-logo">
-                            </a>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label class="form-label">Hôtel/Entreprise *</label>
+                            <input type="text" name="entreprise" class="form-input" placeholder="Nom de votre établissement" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Budget approximatif</label>
+                            <select name="budget" class="form-input">
+                                <option value="">Sélectionnez votre budget</option>
+                                <option value="500-1000€">500 - 1000€</option>
+                                <option value="1000-2000€">1000 - 2000€</option>
+                                <option value="2000-5000€">2000 - 5000€</option>
+                                <option value="5000€+">5000€+</option>
+                            </select>
                         </div>
                     </div>
-                </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Votre projet *</label>
+                        <textarea name="message" class="form-input" rows="6" placeholder="Décrivez votre projet, vos objectifs et vos besoins..." required></textarea>
+                    </div>
+                    
+                    <div id="form-status" class="hidden p-4 rounded-lg mb-4"></div>
+                    
+                    <button type="submit" id="submit-btn" class="btn-primary w-full text-xl py-4">
+                        <span id="submit-text">Envoyer le message</span>
+                        <span id="loading-text" class="hidden">Envoi en cours...</span>
+                    </button>
+                </form>
             </div>
         </div>
     </section>
