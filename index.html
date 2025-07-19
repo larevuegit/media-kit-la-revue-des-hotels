@@ -249,6 +249,30 @@
             margin-right: 15px;
             width: 20px;
         }
+
+        /* Style pour la popup de confirmation */
+        .success-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .success-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -352,7 +376,7 @@
                 <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg hover-scale">
                     <i class="fab fa-tiktok"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B4tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg hover-scale">
+                <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B6tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg hover-scale">
                     <i class="fab fa-linkedin"></i>
                 </a>
                 <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg hover-scale">
@@ -704,7 +728,7 @@
             <!-- Formulaire de contact qui prend toute la largeur -->
             <div class="bg-white border-2 border-gray-200 rounded-lg p-8">
                 <h3 class="text-3xl font-bold mb-8 text-center">Formulaire de contact</h3>
-                <form action="https://formsubmit.co/larevuedeshotels@gmail.com" method="POST" class="space-y-6">
+                <form id="contactForm" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="form-group">
                             <label class="form-label">Nom complet *</label>
@@ -738,18 +762,27 @@
                         <textarea name="message" class="form-input" rows="6" placeholder="Décrivez votre projet, vos objectifs et vos besoins..." required></textarea>
                     </div>
                     
-                    <!-- Configuration FormSubmit avec redirection vers votre media kit -->
-                    <input type="hidden" name="_subject" value="Nouveau message depuis le Media Kit - La Revue des Hotels">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_next" value="https://larevuegit.github.io/media-kit-la-revue-des-hotels/">
-                    <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Nous avons bien reçu votre demande de collaboration et nous vous recontacterons très prochainement pour discuter de votre projet. L'équipe La Revue des Hotels">
-                    
                     <button type="submit" class="btn-primary w-full text-xl py-4">Envoyer le message</button>
                 </form>
             </div>
         </div>
     </section>
+
+    <!-- Popup de confirmation -->
+    <div id="successPopup" class="success-popup">
+        <div class="success-content">
+            <i class="fas fa-check-circle text-green-500 text-6xl mb-6"></i>
+            <h3 class="text-3xl font-bold text-gray-900 mb-4">Message envoyé avec succès !</h3>
+            <p class="text-gray-600 mb-8 large-text">Merci pour votre message ! Nous avons bien reçu votre demande de collaboration et nous vous recontacterons très prochainement pour discuter de votre projet.</p>
+            
+            <div class="space-y-4">
+                <a href="https://larevuegit.github.io/media-kit-la-revue-des-hotels/" class="btn-primary block">Retourner au Media Kit</a>
+                <a href="https://larevuedeshotels.com/" class="btn-primary block" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">Découvrir notre site web</a>
+            </div>
+            
+            <p class="text-sm text-gray-500 mt-6">L'équipe La Revue des Hotels</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -828,6 +861,54 @@
                 });
             }
         });
+    });
+
+    // Gestion du formulaire avec popup de confirmation
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        try {
+            const response = await fetch('https://formsubmit.co/larevuedeshotels@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: new FormData(this)
+            });
+            
+            if (response.ok) {
+                // Afficher la popup de confirmation
+                document.getElementById('successPopup').style.display = 'flex';
+                // Reset le formulaire
+                this.reset();
+            } else {
+                throw new Error('Erreur d\'envoi');
+            }
+        } catch (error) {
+            alert('Erreur lors de l\'envoi du message. Veuillez réessayer ou nous contacter directement à larevuedeshotels@gmail.com');
+        }
+    });
+
+    // Configuration FormSubmit directe
+    const form = document.getElementById('contactForm');
+    form.action = 'https://formsubmit.co/larevuedeshotels@gmail.com';
+    form.method = 'POST';
+    
+    // Ajout des champs cachés
+    const hiddenFields = [
+        { name: '_subject', value: 'Nouveau message depuis le Media Kit - La Revue des Hotels' },
+        { name: '_captcha', value: 'false' },
+        { name: '_template', value: 'table' }
+    ];
+    
+    hiddenFields.forEach(field => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = field.name;
+        input.value = field.value;
+        form.appendChild(input);
     });
 </script>
 </body>
