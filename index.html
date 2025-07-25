@@ -8,6 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
     <style>
         * {
             font-family: 'Inter', sans-serif;
@@ -273,643 +279,1730 @@
             margin: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
+
+        /* ============================================ */
+        /* STYLES DASHBOARD ADMIN */
+        /* ============================================ */
+        
+        .admin-container {
+            min-height: 100vh;
+            background: #f8fafc;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover, .nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .admin-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .section-header h2 {
+            color: #1f2937;
+            font-size: 2rem;
+            margin: 0;
+        }
+        
+        .section-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-info {
+            background: #06b6d4;
+            color: white;
+        }
+        
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .stat-content h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            color: #1f2937;
+        }
+        
+        .stat-content p {
+            margin: 0;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+        
+        .success-message, .error-message {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        /* Styles pour la modération des avis */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #ddd;
+        }
+
+        .review-card.pending {
+            border-left-color: #f59e0b;
+        }
+
+        .review-card.approved {
+            border-left-color: #10b981;
+        }
+
+        .review-card.rejected {
+            border-left-color: #ef4444;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .review-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .review-info h4 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .review-info p {
+            margin: 2px 0 0 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .review-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .review-status.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .review-status.approved {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .review-status.rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .review-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .global-rating {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .detailed-ratings {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .rating-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .rating-item span:first-child {
+            color: #666;
+        }
+
+        .rating-item span:last-child {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .review-comment {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .review-photos {
+            margin: 15px 0;
+        }
+
+        .review-photos h5 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .photos-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .photo-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .photo-thumb:hover {
+            border-color: #667eea;
+        }
+
+        .review-metadata {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .metadata-item {
+            background: #e5e7eb;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #374151;
+        }
+
+        .review-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn-approve {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-reject {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-view {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .filters-row {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .filters-row select {
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .stat-card .stat-icon.pending {
+            background: #f59e0b;
+        }
+
+        .stat-card .stat-icon.approved {
+            background: #10b981;
+        }
+
+        .stat-card .stat-icon.rejected {
+            background: #ef4444;
+        }
+
+        /* Mode Media Kit vs Dashboard */
+        .media-kit-mode {
+            display: block;
+        }
+
+        .dashboard-mode {
+            display: none;
+        }
+
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <a href="https://larevuedeshotels.com" target="_blank">
-                        <img src="https://larevuedeshotels.com/wp-content/uploads/2024/01/AVIS-DES-HOTELS-DE-LUXE-LA-REVUE-DES-HOTELS-INFLUENCEUR-HOTELS-INFLUENCEUR-VOYAGE.png" alt="La Revue des Hotels" class="logo-header">
+    
+    <!-- Bouton d'accès admin -->
+    <button class="admin-toggle" onclick="toggleAdminMode()">
+        <i class="fas fa-cog"></i> Admin
+    </button>
+
+    <!-- MODE MEDIA KIT -->
+    <div id="media-kit-content" class="media-kit-mode">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center">
+                        <a href="https://larevuedeshotels.com" target="_blank">
+                            <img src="https://larevuedeshotels.com/wp-content/uploads/2024/01/AVIS-DES-HOTELS-DE-LUXE-LA-REVUE-DES-HOTELS-INFLUENCEUR-HOTELS-INFLUENCEUR-VOYAGE.png" alt="La Revue des Hotels" class="logo-header">
+                        </a>
+                        <div class="ml-4">
+                            <h1 class="text-2xl font-bold text-gray-900">La Revue des Hotels</h1>
+                            <p class="text-gray-600">Premier Média Hôtelier de Luxe</p>
+                        </div>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#audience" class="text-gray-600 hover:text-blue-600">Audience</a>
+                        <a href="#services" class="text-gray-600 hover:text-blue-600">Services</a>
+                        <a href="#temoignages" class="text-gray-600 hover:text-blue-600">Témoignages</a>
+                        <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-5xl font-bold mb-6">Premier média sur l'hôtellerie de luxe en France</h2>
+                <p class="text-xl mb-8 opacity-90 large-text">Depuis 2012, nous sommes la référence incontournable pour les amateurs d'hôtels de luxe avec plus de 200 000 followers qualifiés sur nos plateformes. Notre expertise reconnue et notre audience engagée font de nous le partenaire idéal pour valoriser votre établissement.</p>
+                <a href="#contact" class="btn-primary text-lg px-8 py-4">Collaborer avec nous</a>
+            </div>
+        </section>
+
+        <!-- Audience Section -->
+        <section id="audience" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Notre Audience en Chiffres</h2>
+                <p class="section-subtitle">Une communauté passionnée et ultra-qualifiée d'amateurs d'hôtellerie de luxe</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                    <div class="stat-card">
+                        <div class="mb-4">
+                            <i class="fab fa-instagram text-4xl text-pink-500"></i>
+                        </div>
+                        <div class="counter" data-target="68600">0</div>
+                        <p class="text-gray-600 mt-2">Followers Instagram</p>
+                        <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="mb-4">
+                            <i class="fab fa-tiktok text-4xl text-black"></i>
+                        </div>
+                        <div class="counter" data-target="123800">0</div>
+                        <p class="text-gray-600 mt-2">Followers TikTok</p>
+                        <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="mb-4">
+                            <i class="fab fa-linkedin text-4xl text-blue-600"></i>
+                        </div>
+                        <div class="counter" data-target="8700">0</div>
+                        <p class="text-gray-600 mt-2">Abonnés LinkedIn</p>
+                        <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B6tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="mb-4">
+                            <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X Logo" class="network-icon mx-auto">
+                        </div>
+                        <div class="counter" data-target="8300">0</div>
+                        <p class="text-gray-600 mt-2">Followers X</p>
+                        <a href="https://x.com/LaRevueHotels" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="mb-4">
+                            <i class="fas fa-globe text-4xl text-blue-500"></i>
+                        </div>
+                        <div class="counter" data-target="16200">0</div>
+                        <p class="text-gray-600 mt-2">Visites mensuelles moyennes site web</p>
+                        <a href="https://larevuedeshotels.com" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Réseaux Sociaux -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="section-title">Retrouvez-nous sur tous nos réseaux</h2>
+                <p class="section-subtitle">Une présence forte et authentique sur toutes les plateformes digitales</p>
+                
+                <div class="flex justify-center space-x-8">
+                    <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg hover-scale">
+                        <i class="fab fa-instagram"></i>
                     </a>
-                    <div class="ml-4">
-                        <h1 class="text-2xl font-bold text-gray-900">La Revue des Hotels</h1>
-                        <p class="text-gray-600">Premier Média Hôtelier de Luxe</p>
-                    </div>
+                    <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg hover-scale">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B6tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg hover-scale">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg hover-scale">
+                        <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X" class="x-logo">
+                    </a>
                 </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#audience" class="text-gray-600 hover:text-blue-600">Audience</a>
-                    <a href="#services" class="text-gray-600 hover:text-blue-600">Services</a>
-                    <a href="#temoignages" class="text-gray-600 hover:text-blue-600">Témoignages</a>
-                    <a href="#contact" class="text-gray-600 hover:text-blue-600">Contact</a>
-                </nav>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-5xl font-bold mb-6">Premier média sur l'hôtellerie de luxe en France</h2>
-            <p class="text-xl mb-8 opacity-90 large-text">Depuis 2012, nous sommes la référence incontournable pour les amateurs d'hôtels de luxe avec plus de 200 000 followers qualifiés sur nos plateformes. Notre expertise reconnue et notre audience engagée font de nous le partenaire idéal pour valoriser votre établissement.</p>
-            <a href="#contact" class="btn-primary text-lg px-8 py-4">Collaborer avec nous</a>
-        </div>
-    </section>
-
-    <!-- Audience Section -->
-    <section id="audience" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">Notre Audience en Chiffres</h2>
-            <p class="section-subtitle">Une communauté passionnée et ultra-qualifiée d'amateurs d'hôtellerie de luxe</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <div class="stat-card">
-                    <div class="mb-4">
-                        <i class="fab fa-instagram text-4xl text-pink-500"></i>
-                    </div>
-                    <div class="counter" data-target="68600">0</div>
-                    <p class="text-gray-600 mt-2">Followers Instagram</p>
-                    <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
-                </div>
+        <!-- SEO Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">N°1 sur Google</h2>
+                <p class="section-subtitle">Domination totale des recherches hôtelières de luxe avec une autorité SEO exceptionnelle</p>
                 
-                <div class="stat-card">
-                    <div class="mb-4">
-                        <i class="fab fa-tiktok text-4xl text-black"></i>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-blue-50 p-8 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-blue-600 mb-2">#1</div>
+                        <h3 class="text-lg font-semibold mb-2">"magazine hotels"</h3>
+                        <p class="text-gray-600">593 000 000 résultats</p>
                     </div>
-                    <div class="counter" data-target="123800">0</div>
-                    <p class="text-gray-600 mt-2">Followers TikTok</p>
-                    <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="mb-4">
-                        <i class="fab fa-linkedin text-4xl text-blue-600"></i>
+                    
+                    <div class="bg-blue-50 p-8 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-blue-600 mb-2">#1</div>
+                        <h3 class="text-lg font-semibold mb-2">"magazine hotels de luxe"</h3>
+                        <p class="text-gray-600">4 580 000 résultats</p>
                     </div>
-                    <div class="counter" data-target="8700">0</div>
-                    <p class="text-gray-600 mt-2">Abonnés LinkedIn</p>
-                    <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B4tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="mb-4">
-                        <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X Logo" class="network-icon mx-auto">
-                    </div>
-                    <div class="counter" data-target="8300">0</div>
-                    <p class="text-gray-600 mt-2">Followers X</p>
-                    <a href="https://x.com/LaRevueHotels" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="mb-4">
-                        <i class="fas fa-globe text-4xl text-blue-500"></i>
-                    </div>
-                    <div class="counter" data-target="16200">0</div>
-                    <p class="text-gray-600 mt-2">Visites mensuelles moyennes site web</p>
-                    <a href="https://larevuedeshotels.com" target="_blank" class="btn-primary mt-3 text-sm">Visiter</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Réseaux Sociaux -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="section-title">Retrouvez-nous sur tous nos réseaux</h2>
-            <p class="section-subtitle">Une présence forte et authentique sur toutes les plateformes digitales</p>
-            
-            <div class="flex justify-center space-x-8">
-                <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg hover-scale">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg hover-scale">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B6tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg hover-scale">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg hover-scale">
-                    <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X" class="x-logo">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEO Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">N°1 sur Google</h2>
-            <p class="section-subtitle">Domination totale des recherches hôtelières de luxe avec une autorité SEO exceptionnelle</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-blue-50 p-8 rounded-lg text-center">
-                    <div class="text-4xl font-bold text-blue-600 mb-2">#1</div>
-                    <h3 class="text-lg font-semibold mb-2">"magazine hotels"</h3>
-                    <p class="text-gray-600">593 000 000 résultats</p>
-                </div>
-                
-                <div class="bg-blue-50 p-8 rounded-lg text-center">
-                    <div class="text-4xl font-bold text-blue-600 mb-2">#1</div>
-                    <h3 class="text-lg font-semibold mb-2">"magazine hotels de luxe"</h3>
-                    <p class="text-gray-600">4 580 000 résultats</p>
-                </div>
-                
-                <div class="bg-blue-50 p-8 rounded-lg text-center">
-                    <div class="text-4xl font-bold text-blue-600 mb-2">#2</div>
-                    <h3 class="text-lg font-semibold mb-2">"actualité hotels de luxe"</h3>
-                    <p class="text-gray-600">17 200 000 résultats</p>
-                </div>
-            </div>
-            
-            <div class="mt-10 bg-gray-50 p-8 rounded-lg">
-                <h3 class="text-2xl font-bold mb-4 text-center">Ce que cela signifie pour vous</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold mb-2 text-lg">Visibilité maximale</h4>
-                        <p class="text-gray-600 large-text">Votre hôtel bénéficie de notre autorité SEO exceptionnelle sur des millions de recherches mensuelles. Chaque mention de votre établissement profite de notre référencement naturel premium.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-2 text-lg">Crédibilité renforcée</h4>
-                        <p class="text-gray-600 large-text">Être associé au leader du secteur renforce immédiatement la réputation de votre établissement et booste vos réservations à court, moyen et long terme grâce à notre expertise reconnue.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">Nos Services</h2>
-            <p class="section-subtitle">Une gamme complète de solutions sur mesure pour maximiser votre visibilité</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="service-card hover-scale">
-                    <div class="text-center">
-                        <i class="fab fa-instagram service-icon text-pink-500"></i>
-                        <h3 class="text-2xl font-bold mb-4">Post Instagram</h3>
-                        <p class="text-gray-600 mb-6 large-text">Publication dédiée à votre établissement avec photos professionnelles haute qualité, storytelling captivant et hashtags optimisés pour toucher notre audience qualifiée.</p>
-                        <div class="text-3xl font-bold text-blue-600">500€</div>
+                    
+                    <div class="bg-blue-50 p-8 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-blue-600 mb-2">#2</div>
+                        <h3 class="text-lg font-semibold mb-2">"actualité hotels de luxe"</h3>
+                        <p class="text-gray-600">17 200 000 résultats</p>
                     </div>
                 </div>
                 
-                <div class="service-card hover-scale">
-                    <div class="text-center">
-                        <i class="fab fa-tiktok service-icon text-black"></i>
-                        <h3 class="text-2xl font-bold mb-4">Vidéo TikTok</h3>
-                        <p class="text-gray-600 mb-6 large-text">Contenu vidéo viral créatif mettant en avant les aspects uniques de votre hôtel, avec montage professionnel et optimisation pour l'algorithme TikTok.</p>
-                        <div class="text-3xl font-bold text-blue-600">750€</div>
-                    </div>
-                </div>
-                
-                <div class="service-card hover-scale">
-                    <div class="text-center">
-                        <i class="fas fa-newspaper service-icon text-blue-500"></i>
-                        <h3 class="text-2xl font-bold mb-4">Article sur notre site</h3>
-                        <p class="text-gray-600 mb-6 large-text">Revue détaillée et professionnelle de votre établissement, SEO optimisée, avec photos exclusives et analyse approfondie de l'expérience client.</p>
-                        <div class="text-3xl font-bold text-blue-600">500€</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="package-card hover-scale">
-                <i class="fas fa-star text-5xl mb-6"></i>
-                <h3 class="text-3xl font-bold mb-6">Package Complet Premium</h3>
-                <p class="text-xl mb-6">La solution tout-en-un pour une visibilité maximale sur tous nos canaux</p>
-                
-                <div class="package-details">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div class="mt-10 bg-gray-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4 text-center">Ce que cela signifie pour vous</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <div class="package-item">
-                                <i class="fas fa-newspaper"></i>
-                                <span>Article complet sur notre site web</span>
+                            <h4 class="font-semibold mb-2 text-lg">Visibilité maximale</h4>
+                            <p class="text-gray-600 large-text">Votre hôtel bénéficie de notre autorité SEO exceptionnelle sur des millions de recherches mensuelles. Chaque mention de votre établissement profite de notre référencement naturel premium.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-lg">Crédibilité renforcée</h4>
+                            <p class="text-gray-600 large-text">Être associé au leader du secteur renforce immédiatement la réputation de votre établissement et booste vos réservations à court, moyen et long terme grâce à notre expertise reconnue.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Nos Services</h2>
+                <p class="section-subtitle">Une gamme complète de solutions sur mesure pour maximiser votre visibilité</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="service-card hover-scale">
+                        <div class="text-center">
+                            <i class="fab fa-instagram service-icon text-pink-500"></i>
+                            <h3 class="text-2xl font-bold mb-4">Post Instagram</h3>
+                            <p class="text-gray-600 mb-6 large-text">Publication dédiée à votre établissement avec photos professionnelles haute qualité, storytelling captivant et hashtags optimisés pour toucher notre audience qualifiée.</p>
+                            <div class="text-3xl font-bold text-blue-600">500€</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card hover-scale">
+                        <div class="text-center">
+                            <i class="fab fa-tiktok service-icon text-black"></i>
+                            <h3 class="text-2xl font-bold mb-4">Vidéo TikTok</h3>
+                            <p class="text-gray-600 mb-6 large-text">Contenu vidéo viral créatif mettant en avant les aspects uniques de votre hôtel, avec montage professionnel et optimisation pour l'algorithme TikTok.</p>
+                            <div class="text-3xl font-bold text-blue-600">750€</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card hover-scale">
+                        <div class="text-center">
+                            <i class="fas fa-newspaper service-icon text-blue-500"></i>
+                            <h3 class="text-2xl font-bold mb-4">Article sur notre site</h3>
+                            <p class="text-gray-600 mb-6 large-text">Revue détaillée et professionnelle de votre établissement, SEO optimisée, avec photos exclusives et analyse approfondie de l'expérience client.</p>
+                            <div class="text-3xl font-bold text-blue-600">500€</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="package-card hover-scale">
+                    <i class="fas fa-star text-5xl mb-6"></i>
+                    <h3 class="text-3xl font-bold mb-6">Package Complet Premium</h3>
+                    <p class="text-xl mb-6">La solution tout-en-un pour une visibilité maximale sur tous nos canaux</p>
+                    
+                    <div class="package-details">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                            <div>
+                                <div class="package-item">
+                                    <i class="fas fa-newspaper"></i>
+                                    <span>Article complet sur notre site web</span>
+                                </div>
+                                <div class="package-item">
+                                    <i class="fab fa-instagram"></i>
+                                    <span>Post Instagram avec stories</span>
+                                </div>
+                                <div class="package-item">
+                                    <i class="fab fa-tiktok"></i>
+                                    <span>Vidéo TikTok professionnelle</span>
+                                </div>
                             </div>
-                            <div class="package-item">
+                            <div>
+                                <div class="package-item">
+                                    <i class="fab fa-linkedin"></i>
+                                    <span>Publication LinkedIn B2B</span>
+                                </div>
+                                <div class="package-item">
+                                    <i class="fab fa-twitter"></i>
+                                    <span>Posts sur X (Twitter)</span>
+                                </div>
+                                <div class="package-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Rapport de performance détaillé</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-5xl font-bold mt-8">1 000€</div>
+                    <p class="text-lg mt-4 opacity-90">Économisez 43% par rapport aux services individuels</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campagnes Publicitaires -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Campagnes Publicitaires</h2>
+                <p class="section-subtitle">Sponsorisez directement sur notre site web avec des emplacements premium</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="ad-example">
+                        <h3 class="text-xl font-semibold mb-4">Exemple : Bannière Expedia</h3>
+                        <img src="https://i.ibb.co/qMgzmyR2/Capture-d-e-cran-2025-07-18-a-15-24-32.png" alt="Exemple bannière publicitaire" class="w-full rounded-lg">
+                        <p class="text-gray-600 mt-4 large-text">Bannière intégrée de manière native dans notre contenu, garantissant une visibilité optimale auprès de nos 16 200 visiteurs mensuels.</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="font-bold text-xl mb-2">Top Ads (Mobile + Desktop)</h3>
+                            <p class="text-gray-600 mb-2">Format : 970 x 90 pixels - Position premium</p>
+                            <p class="text-gray-600 mb-4 large-text">Emplacement le plus visible, en haut de page, garantissant une exposition maximale à tous nos visiteurs.</p>
+                            <div class="text-3xl font-bold text-blue-600">200€/mois</div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="font-bold text-xl mb-2">Mid Ads (Mobile + Desktop)</h3>
+                            <p class="text-gray-600 mb-2">Format : 970 x 90 pixels - Position intermédiaire</p>
+                            <p class="text-gray-600 mb-4 large-text">Intégration native au milieu du contenu, idéale pour capter l'attention pendant la lecture.</p>
+                            <div class="text-3xl font-bold text-blue-600">100€/mois</div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="font-bold text-xl mb-2">Side Ads (Desktop)</h3>
+                            <p class="text-gray-600 mb-2">Format : carré - Barre latérale</p>
+                            <p class="text-gray-600 mb-4 large-text">Présence constante en sidebar, parfaite pour le branding et la reconnaissance de marque.</p>
+                            <div class="text-3xl font-bold text-blue-600">50€/mois</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Témoignages -->
+        <section id="temoignages" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Ils nous font confiance</h2>
+                <p class="section-subtitle">Nos partenaires prestigieux qui ont bénéficié de notre expertise</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="testimonial-card hover-scale">
+                        <img src="https://corporate.wyndhamhotels.com/wp-content/uploads/2024/06/Dolce-Versailles-Exterior-scaled.jpg" alt="Domaine du Montcel" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="font-bold text-lg mb-2">Hôtel Domaine du Montcel</h3>
+                        <p class="text-gray-600 mb-2">Dolce by Wyndham Versailles</p>
+                        <div class="flex text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3 large-text">Collaboration complète avec excellent retour sur investissement.</p>
+                        <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
+                    </div>
+                    
+                    <div class="testimonial-card hover-scale">
+                        <img src="https://rhombus-europe.com/wp-content/uploads/2022/11/exterior-view.jpg" alt="Le Collectionneur" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="font-bold text-lg mb-2">Hôtel Le Collectionneur</h3>
+                        <p class="text-gray-600 mb-2">Paris - Arc de Triomphe</p>
+                        <div class="flex text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3 large-text">Partenariat stratégique avec forte visibilité digitale.</p>
+                        <a href="https://larevuedeshotels.com/avis-honnete-hotel-du-collectionneur-paris" target="_blank" class="text-blue-600 hover:underline">Lire l'article</a>
+                    </div>
+                    
+                    <div class="testimonial-card hover-scale">
+                        <img src="https://z.cdrst.com/foto/hotel-sf/1230aeed/granderesp/foto-hotel-1230a443.jpg" alt="Grand Monarque" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="font-bold text-lg mb-2">Hôtel Grand Monarque</h3>
+                        <p class="text-gray-600 mb-2">Chartres - Hôtel & Spa</p>
+                        <div class="flex text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3 large-text">Collaboration fructueuse avec impact mesurable.</p>
+                        <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
+                    </div>
+                    
+                    <div class="testimonial-card hover-scale">
+                        <img src="https://www.hotels-insolites.com/photo/61/grandes/01.jpg" alt="Hôtel Palafitte" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h3 class="font-bold text-lg mb-2">Hôtel Palafitte</h3>
+                        <p class="text-gray-600 mb-2">Neuchâtel, Suisse</p>
+                        <div class="flex text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-sm text-green-600 mb-2 font-semibold">Plus de 170K vues sur TikTok</p>
+                        <p class="text-sm text-gray-600 mb-3 large-text">Succès viral international avec retombées exceptionnelles.</p>
+                        <a href="https://www.tiktok.com/@larevuedeshotels/video/7491294774830419222" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI & Avantages -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">ROI & Avantages pour nos Partenaires</h2>
+                <p class="section-subtitle">Des résultats mesurables et une visibilité exceptionnelle avec un retour sur investissement prouvé</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-chart-line text-blue-600 text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-4">Notoriété instantanée</h3>
+                        <p class="text-gray-600 large-text">Exposition immédiate auprès de plus de 200 000 passionnés d'hôtellerie de luxe, garantissant une visibilité premium pour votre établissement.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-users text-blue-600 text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-4">Audience ultra-ciblée</h3>
+                        <p class="text-gray-600 large-text">Communauté ultra-qualifiée de voyageurs premium, décideurs et influenceurs, avec un pouvoir d'achat élevé et une forte propension à réserver.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-medal text-blue-600 text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-4">Expertise reconnue</h3>
+                        <p class="text-gray-600 large-text">12 ans d'expérience et une réputation incontestable dans le secteur, garantissant une crédibilité et une légitimité immédiate à votre partenariat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Processus -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Votre Collaboration en 3 Étapes</h2>
+                <p class="section-subtitle">Un processus simple, transparent et efficace pour une collaboration réussie</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
+                        <h3 class="font-bold text-xl mb-4">Premier échange stratégique</h3>
+                        <p class="text-gray-600 large-text">Nous discutons en détail de vos besoins, objectifs et budget pour définir la stratégie optimale et personnalisée pour votre établissement.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
+                        <h3 class="font-bold text-xl mb-4">Création du plan média</h3>
+                        <p class="text-gray-600 large-text">Élaboration et validation du plan de communication personnalisé, avec timeline détaillée et livrables précis adaptés à vos objectifs.</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
+                        <h3 class="font-bold text-xl mb-4">Livraison & suivi</h3>
+                        <p class="text-gray-600 large-text">Création du contenu premium, publication coordonnée sur nos plateformes et analyse détaillée des retombées avec rapport complet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact-section bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Contactez-nous</h2>
+                <p class="section-subtitle">Prêt à collaborer ? Parlons de votre projet et créons ensemble votre stratégie de visibilité</p>
+                
+                <!-- Informations de contact en haut -->
+                <div class="bg-gray-50 rounded-lg p-8 mb-12">
+                    <h3 class="text-2xl font-bold mb-8 text-center">Informations de contact</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-envelope text-blue-600 mb-4 text-3xl"></i>
+                            <p class="font-semibold text-lg">Email professionnel</p>
+                            <p class="text-gray-600">larevuedeshotels@gmail.com</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-globe text-blue-600 mb-4 text-3xl"></i>
+                            <p class="font-semibold text-lg">Site web</p>
+                            <a href="https://larevuedeshotels.com" target="_blank" class="text-blue-600 hover:underline">larevuedeshotels.com</a>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-map-marker-alt text-blue-600 mb-4 text-3xl"></i>
+                            <p class="font-semibold text-lg">Localisation</p>
+                            <p class="text-gray-600">Paris, France</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 text-center">
+                        <h4 class="font-bold mb-6 text-xl">Suivez-nous sur nos réseaux</h4>
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg">
                                 <i class="fab fa-instagram"></i>
-                                <span>Post Instagram avec stories</span>
-                            </div>
-                            <div class="package-item">
+                            </a>
+                            <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg">
                                 <i class="fab fa-tiktok"></i>
-                                <span>Vidéo TikTok professionnelle</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="package-item">
+                            </a>
+                            <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B6tels-magazine-h%C3%B6tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg">
                                 <i class="fab fa-linkedin"></i>
-                                <span>Publication LinkedIn B2B</span>
-                            </div>
-                            <div class="package-item">
-                                <i class="fab fa-twitter"></i>
-                                <span>Posts sur X (Twitter)</span>
-                            </div>
-                            <div class="package-item">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Rapport de performance détaillé</span>
-                            </div>
+                            </a>
+                            <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg">
+                                <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X" class="x-logo">
+                            </a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="text-5xl font-bold mt-8">1 000€</div>
-                <p class="text-lg mt-4 opacity-90">Économisez 43% par rapport aux services individuels</p>
+                <!-- Formulaire de contact qui prend toute la largeur -->
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-8">
+                    <h3 class="text-3xl font-bold mb-8 text-center">Formulaire de contact</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-group">
+                                <label class="form-label">Nom complet *</label>
+                                <input type="text" name="nom" class="form-input" placeholder="Votre nom complet" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email professionnel *</label>
+                                <input type="email" name="email" class="form-input" placeholder="votre@email.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-group">
+                                <label class="form-label">Hôtel/Entreprise *</label>
+                                <input type="text" name="entreprise" class="form-input" placeholder="Nom de votre établissement" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Budget approximatif</label>
+                                <select name="budget" class="form-input">
+                                    <option value="">Sélectionnez votre budget</option>
+                                    <option value="500-1000€">500 - 1000€</option>
+                                    <option value="1000-2000€">1000 - 2000€</option>
+                                    <option value="2000-5000€">2000 - 5000€</option>
+                                    <option value="5000€+">5000€+</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Votre projet *</label>
+                            <textarea name="message" class="form-input" rows="6" placeholder="Décrivez votre projet, vos objectifs et vos besoins..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full text-xl py-4">Envoyer le message</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Campagnes Publicitaires -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">Campagnes Publicitaires</h2>
-            <p class="section-subtitle">Sponsorisez directement sur notre site web avec des emplacements premium</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div class="ad-example">
-                    <h3 class="text-xl font-semibold mb-4">Exemple : Bannière Expedia</h3>
-                    <img src="https://i.ibb.co/qMgzmyR2/Capture-d-e-cran-2025-07-18-a-15-24-32.png" alt="Exemple bannière publicitaire" class="w-full rounded-lg">
-                    <p class="text-gray-600 mt-4 large-text">Bannière intégrée de manière native dans notre contenu, garantissant une visibilité optimale auprès de nos 16 200 visiteurs mensuels.</p>
+        <!-- Popup de confirmation -->
+        <div id="successPopup" class="success-popup">
+            <div class="success-content">
+                <i class="fas fa-check-circle text-green-500 text-6xl mb-6"></i>
+                <h3 class="text-3xl font-bold text-gray-900 mb-4">Message envoyé avec succès !</h3>
+                <p class="text-gray-600 mb-8 large-text">Merci pour votre message ! Nous avons bien reçu votre demande de collaboration et nous vous recontacterons très prochainement pour discuter de votre projet.</p>
+                
+                <div class="space-y-4">
+                    <a href="https://larevuegit.github.io/media-kit-la-revue-des-hotels/" class="btn-primary block">Retourner au Media Kit</a>
+                    <a href="https://larevuedeshotels.com/" class="btn-primary block" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">Découvrir notre site web</a>
                 </div>
                 
-                <div class="space-y-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-xl mb-2">Top Ads (Mobile + Desktop)</h3>
-                        <p class="text-gray-600 mb-2">Format : 970 x 90 pixels - Position premium</p>
-                        <p class="text-gray-600 mb-4 large-text">Emplacement le plus visible, en haut de page, garantissant une exposition maximale à tous nos visiteurs.</p>
-                        <div class="text-3xl font-bold text-blue-600">200€/mois</div>
-                    </div>
+                <p class="text-sm text-gray-500 mt-6">L'équipe La Revue des Hotels</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <img src="https://larevuedeshotels.com/wp-content/uploads/2024/01/AVIS-DES-HOTELS-DE-LUXE-LA-REVUE-DES-HOTELS-INFLUENCEUR-HOTELS-INFLUENCEUR-VOYAGE.png" alt="La Revue des Hotels" class="h-20 mx-auto mb-6">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">La Revue des Hotels</h3>
+                    <p class="text-gray-600 mb-8 large-text">Premier média hôtelier de luxe en France depuis 2012</p>
                     
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-xl mb-2">Mid Ads (Mobile + Desktop)</h3>
-                        <p class="text-gray-600 mb-2">Format : 970 x 90 pixels - Position intermédiaire</p>
-                        <p class="text-gray-600 mb-4 large-text">Intégration native au milieu du contenu, idéale pour capter l'attention pendant la lecture.</p>
-                        <div class="text-3xl font-bold text-blue-600">100€/mois</div>
-                    </div>
-                    
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-xl mb-2">Side Ads (Desktop)</h3>
-                        <p class="text-gray-600 mb-2">Format : carré - Barre latérale</p>
-                        <p class="text-gray-600 mb-4 large-text">Présence constante en sidebar, parfaite pour le branding et la reconnaissance de marque.</p>
-                        <div class="text-3xl font-bold text-blue-600">50€/mois</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Témoignages -->
-    <section id="temoignages" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">Ils nous font confiance</h2>
-            <p class="section-subtitle">Nos partenaires prestigieux qui ont bénéficié de notre expertise</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="testimonial-card hover-scale">
-                    <img src="https://corporate.wyndhamhotels.com/wp-content/uploads/2024/06/Dolce-Versailles-Exterior-scaled.jpg" alt="Domaine du Montcel" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Hôtel Domaine du Montcel</h3>
-                    <p class="text-gray-600 mb-2">Dolce by Wyndham Versailles</p>
-                    <div class="flex text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-3 large-text">Collaboration complète avec excellent retour sur investissement.</p>
-                    <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
-                </div>
-                
-                <div class="testimonial-card hover-scale">
-                    <img src="https://rhombus-europe.com/wp-content/uploads/2022/11/exterior-view.jpg" alt="Le Collectionneur" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Hôtel Le Collectionneur</h3>
-                    <p class="text-gray-600 mb-2">Paris - Arc de Triomphe</p>
-                    <div class="flex text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-3 large-text">Partenariat stratégique avec forte visibilité digitale.</p>
-                    <a href="https://larevuedeshotels.com/avis-honnete-hotel-du-collectionneur-paris" target="_blank" class="text-blue-600 hover:underline">Lire l'article</a>
-                </div>
-                
-                <div class="testimonial-card hover-scale">
-                    <img src="https://z.cdrst.com/foto/hotel-sf/1230aeed/granderesp/foto-hotel-1230a443.jpg" alt="Grand Monarque" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Hôtel Grand Monarque</h3>
-                    <p class="text-gray-600 mb-2">Chartres - Hôtel & Spa</p>
-                    <div class="flex text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-3 large-text">Collaboration fructueuse avec impact mesurable.</p>
-                    <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
-                </div>
-                
-                <div class="testimonial-card hover-scale">
-                    <img src="https://www.hotels-insolites.com/photo/61/grandes/01.jpg" alt="Hôtel Palafitte" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="font-bold text-lg mb-2">Hôtel Palafitte</h3>
-                    <p class="text-gray-600 mb-2">Neuchâtel, Suisse</p>
-                    <div class="flex text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-sm text-green-600 mb-2 font-semibold">Plus de 170K vues sur TikTok</p>
-                    <p class="text-sm text-gray-600 mb-3 large-text">Succès viral international avec retombées exceptionnelles.</p>
-                    <a href="https://www.tiktok.com/@larevuedeshotels/video/7491294774830419222" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ROI & Avantages -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">ROI & Avantages pour nos Partenaires</h2>
-            <p class="section-subtitle">Des résultats mesurables et une visibilité exceptionnelle avec un retour sur investissement prouvé</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-chart-line text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-4">Notoriété instantanée</h3>
-                    <p class="text-gray-600 large-text">Exposition immédiate auprès de plus de 200 000 passionnés d'hôtellerie de luxe, garantissant une visibilité premium pour votre établissement.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-users text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-4">Audience ultra-ciblée</h3>
-                    <p class="text-gray-600 large-text">Communauté ultra-qualifiée de voyageurs premium, décideurs et influenceurs, avec un pouvoir d'achat élevé et une forte propension à réserver.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-medal text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-4">Expertise reconnue</h3>
-                    <p class="text-gray-600 large-text">12 ans d'expérience et une réputation incontestable dans le secteur, garantissant une crédibilité et une légitimité immédiate à votre partenariat.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Processus -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">Votre Collaboration en 3 Étapes</h2>
-            <p class="section-subtitle">Un processus simple, transparent et efficace pour une collaboration réussie</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
-                    <h3 class="font-bold text-xl mb-4">Premier échange stratégique</h3>
-                    <p class="text-gray-600 large-text">Nous discutons en détail de vos besoins, objectifs et budget pour définir la stratégie optimale et personnalisée pour votre établissement.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
-                    <h3 class="font-bold text-xl mb-4">Création du plan média</h3>
-                    <p class="text-gray-600 large-text">Élaboration et validation du plan de communication personnalisé, avec timeline détaillée et livrables précis adaptés à vos objectifs.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
-                    <h3 class="font-bold text-xl mb-4">Livraison & suivi</h3>
-                    <p class="text-gray-600 large-text">Création du contenu premium, publication coordonnée sur nos plateformes et analyse détaillée des retombées avec rapport complet.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="contact-section bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title">Contactez-nous</h2>
-            <p class="section-subtitle">Prêt à collaborer ? Parlons de votre projet et créons ensemble votre stratégie de visibilité</p>
-            
-            <!-- Informations de contact en haut -->
-            <div class="bg-gray-50 rounded-lg p-8 mb-12">
-                <h3 class="text-2xl font-bold mb-8 text-center">Informations de contact</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                    <div class="flex flex-col items-center">
-                        <i class="fas fa-envelope text-blue-600 mb-4 text-3xl"></i>
-                        <p class="font-semibold text-lg">Email professionnel</p>
-                        <p class="text-gray-600">larevuedeshotels@gmail.com</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <i class="fas fa-globe text-blue-600 mb-4 text-3xl"></i>
-                        <p class="font-semibold text-lg">Site web</p>
-                        <a href="https://larevuedeshotels.com" target="_blank" class="text-blue-600 hover:underline">larevuedeshotels.com</a>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <i class="fas fa-map-marker-alt text-blue-600 mb-4 text-3xl"></i>
-                        <p class="font-semibold text-lg">Localisation</p>
-                        <p class="text-gray-600">Paris, France</p>
-                    </div>
-                </div>
-                
-                <div class="mt-10 text-center">
-                    <h4 class="font-bold mb-6 text-xl">Suivez-nous sur nos réseaux</h4>
-                    <div class="flex justify-center space-x-4">
+                    <div class="flex justify-center space-x-6 mb-8">
                         <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg">
                             <i class="fab fa-instagram"></i>
                         </a>
                         <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B4tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg">
+                        <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B6tels-magazine-h%C3%B6tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg">
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg">
                             <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X" class="x-logo">
                         </a>
                     </div>
+                    
+                    <p class="text-gray-500 text-lg">© 2025 La Revue des Hotels. Tous droits réservés.</p>
                 </div>
             </div>
-            
-            <!-- Formulaire de contact qui prend toute la largeur -->
-            <div class="bg-white border-2 border-gray-200 rounded-lg p-8">
-                <h3 class="text-3xl font-bold mb-8 text-center">Formulaire de contact</h3>
-                <form id="contactForm" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="form-group">
-                            <label class="form-label">Nom complet *</label>
-                            <input type="text" name="nom" class="form-input" placeholder="Votre nom complet" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email professionnel *</label>
-                            <input type="email" name="email" class="form-input" placeholder="votre@email.com" required>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="form-group">
-                            <label class="form-label">Hôtel/Entreprise *</label>
-                            <input type="text" name="entreprise" class="form-input" placeholder="Nom de votre établissement" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Budget approximatif</label>
-                            <select name="budget" class="form-input">
-                                <option value="">Sélectionnez votre budget</option>
-                                <option value="500-1000€">500 - 1000€</option>
-                                <option value="1000-2000€">1000 - 2000€</option>
-                                <option value="2000-5000€">2000 - 5000€</option>
-                                <option value="5000€+">5000€+</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Votre projet *</label>
-                        <textarea name="message" class="form-input" rows="6" placeholder="Décrivez votre projet, vos objectifs et vos besoins..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary w-full text-xl py-4">Envoyer le message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+        </footer>
+    </div>
 
-    <!-- Popup de confirmation -->
-    <div id="successPopup" class="success-popup">
-        <div class="success-content">
-            <i class="fas fa-check-circle text-green-500 text-6xl mb-6"></i>
-            <h3 class="text-3xl font-bold text-gray-900 mb-4">Message envoyé avec succès !</h3>
-            <p class="text-gray-600 mb-8 large-text">Merci pour votre message ! Nous avons bien reçu votre demande de collaboration et nous vous recontacterons très prochainement pour discuter de votre projet.</p>
-            
-            <div class="space-y-4">
-                <a href="https://larevuegit.github.io/media-kit-la-revue-des-hotels/" class="btn-primary block">Retourner au Media Kit</a>
-                <a href="https://larevuedeshotels.com/" class="btn-primary block" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">Découvrir notre site web</a>
+    <!-- MODE DASHBOARD ADMIN -->
+    <div id="admin-content" class="dashboard-mode">
+        <div class="admin-container">
+            <!-- Header Admin -->
+            <div class="admin-header">
+                <h1><i class="fas fa-cog"></i> Dashboard Admin - La Revue des Hotels</h1>
+                <p>Gestion complète du contenu et modération</p>
             </div>
-            
-            <p class="text-sm text-gray-500 mt-6">L'équipe La Revue des Hotels</p>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showEstablishments()">
+                    <i class="fas fa-hotel"></i> Établissements
+                </button>
+                <button class="nav-btn" onclick="showNews()">
+                    <i class="fas fa-newspaper"></i> Actualités
+                </button>
+                <button class="nav-btn" onclick="showReviews()">
+                    <i class="fas fa-comments"></i> Avis
+                </button>
+                <button class="nav-btn" onclick="showAnalytics()">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </button>
+            </div>
+
+            <!-- Section Établissements -->
+            <div id="establishments-section" class="admin-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-hotel"></i> Gestion des Établissements</h2>
+                    <div class="section-controls">
+                        <button class="btn btn-primary" onclick="addNewEstablishment()">
+                            <i class="fas fa-plus"></i> Nouvel Établissement
+                        </button>
+                        <button class="btn btn-info" onclick="loadEstablishments()">
+                            <i class="fas fa-sync"></i> Actualiser
+                        </button>
+                    </div>
+                </div>
+                <div id="establishments-content">
+                    <!-- Contenu chargé dynamiquement -->
+                </div>
+            </div>
+
+            <!-- Section Actualités -->
+            <div id="news-section" class="admin-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-newspaper"></i> Gestion des Actualités</h2>
+                    <div class="section-controls">
+                        <button class="btn btn-primary" onclick="addNewNews()">
+                            <i class="fas fa-plus"></i> Nouvelle Actualité
+                        </button>
+                        <button class="btn btn-info" onclick="loadNews()">
+                            <i class="fas fa-sync"></i> Actualiser
+                        </button>
+                    </div>
+                </div>
+                <div id="news-content">
+                    <!-- Contenu chargé dynamiquement -->
+                </div>
+            </div>
+
+            <!-- Section Modération des Avis -->
+            <div id="reviews-section" class="admin-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-comments"></i> Modération des Avis</h2>
+                    <div class="section-controls">
+                        <button class="btn btn-info" onclick="loadPendingReviews()">
+                            <i class="fas fa-sync"></i> Actualiser
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistiques des avis -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="pending-reviews-count">0</h3>
+                            <p>En attente</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon approved">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="approved-reviews-count">0</h3>
+                            <p>Approuvés</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon rejected">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="rejected-reviews-count">0</h3>
+                            <p>Rejetés</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtres -->
+                <div class="filters-row">
+                    <select id="review-status-filter" class="form-control" onchange="filterReviews()">
+                        <option value="all">Tous les statuts</option>
+                        <option value="pending">En attente</option>
+                        <option value="approved">Approuvés</option>
+                        <option value="rejected">Rejetés</option>
+                    </select>
+                    <select id="review-establishment-filter" class="form-control" onchange="filterReviews()">
+                        <option value="all">Tous les établissements</option>
+                    </select>
+                </div>
+
+                <!-- Liste des avis -->
+                <div class="reviews-container">
+                    <div id="reviews-list" class="reviews-grid">
+                        <!-- Les avis seront chargés ici -->
+                    </div>
+                    <div id="reviews-empty" class="empty-state" style="display: none;">
+                        <i class="fas fa-comments"></i>
+                        <p>Aucun avis trouvé</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Analytics -->
+            <div id="analytics-section" class="admin-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> Analytics & Statistiques</h2>
+                </div>
+                <div id="analytics-content">
+                    <p>Statistiques et analyses en cours de développement...</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <img src="https://larevuedeshotels.com/wp-content/uploads/2024/01/AVIS-DES-HOTELS-DE-LUXE-LA-REVUE-DES-HOTELS-INFLUENCEUR-HOTELS-INFLUENCEUR-VOYAGE.png" alt="La Revue des Hotels" class="h-20 mx-auto mb-6">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">La Revue des Hotels</h3>
-                <p class="text-gray-600 mb-8 large-text">Premier média hôtelier de luxe en France depuis 2012</p>
-                
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://www.instagram.com/larevuedeshotels" target="_blank" class="social-icon instagram-bg">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@larevuedeshotels" target="_blank" class="social-icon tiktok-bg">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/la-revue-des-h%C3%B6tels-magazine-h%C3%B6tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" class="social-icon linkedin-bg">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://x.com/LaRevueHotels" target="_blank" class="social-icon x-bg">
-                        <img src="https://logos-world.net/wp-content/uploads/2023/08/X-Logo.png" alt="X" class="x-logo">
-                    </a>
-                </div>
-                
-                <p class="text-gray-500 text-lg">© 2025 La Revue des Hotels. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-    // Compteurs animés avec animation plus lente
-    function animateCounters() {
-        const counters = document.querySelectorAll('.counter');
+        // ============================================
+        // CONFIGURATION FIREBASE
+        // ============================================
         
-        counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const duration = 4000;
-            const step = target / (duration / 16);
-            let current = 0;
+        const firebaseConfig = {
+            apiKey: "AIzaSyBjHNzW6i_d7HCZx_2K9Pv5JXIvafo1XNo",
+            authDomain: "larevueapp-1f205.firebaseapp.com",
+            projectId: "larevueapp-1f205",
+            storageBucket: "larevueapp-1f205.firebasestorage.app",
+            messagingSenderId: "248256257582",
+            appId: "1:248256257582:web:a7b9281d0143e7ed35c9bf"
+        };
+
+        // Initialiser Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        // ============================================
+        // GESTION MODE ADMIN / MEDIA KIT
+        // ============================================
+        
+        let isAdminMode = false;
+
+        function toggleAdminMode() {
+            isAdminMode = !isAdminMode;
             
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                counter.textContent = Math.floor(current).toLocaleString();
-            }, 16);
-        });
-    }
-
-    // Intersection Observer pour déclencher les animations
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounters();
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-
-    const statsSection = document.querySelector('#audience');
-    if (statsSection) {
-        observer.observe(statsSection);
-    }
-
-    // Smooth scrolling pour les liens d'ancrage
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Gestion du formulaire avec popup de confirmation
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        
-        try {
-            const response = await fetch('https://formsubmit.co/larevuedeshotels@gmail.com', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json'
-                },
-                body: new FormData(this)
-            });
-            
-            if (response.ok) {
-                // Afficher la popup de confirmation
-                document.getElementById('successPopup').style.display = 'flex';
-                // Reset le formulaire
-                this.reset();
+            if (isAdminMode) {
+                document.getElementById('media-kit-content').classList.remove('media-kit-mode');
+                document.getElementById('media-kit-content').classList.add('dashboard-mode');
+                document.getElementById('admin-content').classList.remove('dashboard-mode');
+                document.getElementById('admin-content').classList.add('media-kit-mode');
+                
+                // Charger les établissements par défaut
+                showEstablishments();
             } else {
-                throw new Error('Erreur d\'envoi');
+                document.getElementById('media-kit-content').classList.remove('dashboard-mode');
+                document.getElementById('media-kit-content').classList.add('media-kit-mode');
+                document.getElementById('admin-content').classList.remove('media-kit-mode');
+                document.getElementById('admin-content').classList.add('dashboard-mode');
             }
-        } catch (error) {
-            alert('Erreur lors de l\'envoi du message. Veuillez réessayer ou nous contacter directement à larevuedeshotels@gmail.com');
         }
-    });
 
-    // Configuration FormSubmit directe
-    const form = document.getElementById('contactForm');
-    form.action = 'https://formsubmit.co/larevuedeshotels@gmail.com';
-    form.method = 'POST';
-    
-    // Ajout des champs cachés
-    const hiddenFields = [
-        { name: '_subject', value: 'Nouveau message depuis le Media Kit - La Revue des Hotels' },
-        { name: '_captcha', value: 'false' },
-        { name: '_template', value: 'table' }
-    ];
-    
-    hiddenFields.forEach(field => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = field.name;
-        input.value = field.value;
-        form.appendChild(input);
-    });
-</script>
+        // ============================================
+        // GESTION NAVIGATION ADMIN
+        // ============================================
+        
+        function hideAllSections() {
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.style.display = 'none';
+            });
+        }
+
+        function updateActiveNav(activeText) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim().includes(activeText)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function showEstablishments() {
+            hideAllSections();
+            document.getElementById('establishments-section').style.display = 'block';
+            updateActiveNav('Établissements');
+            loadEstablishments();
+        }
+
+        function showNews() {
+            hideAllSections();
+            document.getElementById('news-section').style.display = 'block';
+            updateActiveNav('Actualités');
+            loadNews();
+        }
+
+        function showReviews() {
+            hideAllSections();
+            document.getElementById('reviews-section').style.display = 'block';
+            updateActiveNav('Avis');
+            loadPendingReviews();
+        }
+
+        function showAnalytics() {
+            hideAllSections();
+            document.getElementById('analytics-section').style.display = 'block';
+            updateActiveNav('Analytics');
+        }
+
+        // ============================================
+        // UTILITAIRES
+        // ============================================
+        
+        function showLoadingState(containerId) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = `
+                    <div class="loading-state">
+                        <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+                        <p>Chargement en cours...</p>
+                    </div>
+                `;
+            }
+        }
+
+        function showSuccess(message) {
+            // Créer une notification temporaire
+            const notification = document.createElement('div');
+            notification.className = 'success-message';
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '9999';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+
+        function showError(message) {
+            // Créer une notification d'erreur temporaire
+            const notification = document.createElement('div');
+            notification.className = 'error-message';
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '9999';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+
+        // ============================================
+        // GESTION DES ÉTABLISSEMENTS (placeholder)
+        // ============================================
+        
+        function loadEstablishments() {
+            showLoadingState('establishments-content');
+            
+            setTimeout(() => {
+                document.getElementById('establishments-content').innerHTML = `
+                    <p>Section des établissements en cours de développement...</p>
+                    <p>Fonctionnalités prévues :</p>
+                    <ul>
+                        <li>✅ Ajouter de nouveaux hôtels/restaurants/spas</li>
+                        <li>✅ Modifier les informations des établissements</li>
+                        <li>✅ Gérer les images et galeries</li>
+                        <li>✅ Définir les codes promo</li>
+                        <li>✅ Gérer le classement</li>
+                    </ul>
+                `;
+            }, 1000);
+        }
+
+        function addNewEstablishment() {
+            alert('Formulaire d\'ajout d\'établissement à développer');
+        }
+
+        // ============================================
+        // GESTION DES ACTUALITÉS (placeholder)
+        // ============================================
+        
+        function loadNews() {
+            showLoadingState('news-content');
+            
+            setTimeout(() => {
+                document.getElementById('news-content').innerHTML = `
+                    <p>Section des actualités en cours de développement...</p>
+                    <p>Fonctionnalités prévues :</p>
+                    <ul>
+                        <li>✅ Créer de nouvelles actualités</li>
+                        <li>✅ Gérer les images et médias</li>
+                        <li>✅ Programmer les publications</li>
+                        <li>✅ Gérer les catégories</li>
+                        <li>✅ Mettre en avant ("À la Une")</li>
+                    </ul>
+                `;
+            }, 1000);
+        }
+
+        function addNewNews() {
+            alert('Formulaire d\'ajout d\'actualité à développer');
+        }
+
+        // ============================================
+        // GESTION DES AVIS
+        // ============================================
+
+        let allReviews = [];
+        let establishments = {};
+
+        // Chargement des avis en attente
+        async function loadPendingReviews() {
+            try {
+                showLoadingState('reviews-list');
+                
+                // Charger tous les avis
+                const reviewsSnapshot = await db.collection('reviews')
+                    .orderBy('createdAt', 'desc')
+                    .get();
+                
+                allReviews = [];
+                reviewsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    allReviews.push({
+                        id: doc.id,
+                        ...data,
+                        createdAt: data.createdAt?.toDate() || new Date(),
+                        status: data.status || 'pending'
+                    });
+                });
+
+                // Charger les établissements pour les noms
+                const establishmentsSnapshot = await db.collection('establishments').get();
+                establishments = {};
+                establishmentsSnapshot.forEach(doc => {
+                    establishments[doc.id] = doc.data();
+                });
+
+                // Mettre à jour les statistiques
+                updateReviewsStats();
+                
+                // Charger les filtres
+                loadEstablishmentFilter();
+                
+                // Afficher les avis
+                displayReviews();
+                
+                showSuccess('Avis chargés avec succès');
+            } catch (error) {
+                console.error('Erreur chargement avis:', error);
+                showError('Erreur lors du chargement des avis');
+            }
+        }
+
+        // Mettre à jour les statistiques
+        function updateReviewsStats() {
+            const pending = allReviews.filter(r => r.status === 'pending').length;
+            const approved = allReviews.filter(r => r.status === 'approved').length;
+            const rejected = allReviews.filter(r => r.status === 'rejected').length;
+            
+            document.getElementById('pending-reviews-count').textContent = pending;
+            document.getElementById('approved-reviews-count').textContent = approved;
+            document.getElementById('rejected-reviews-count').textContent = rejected;
+        }
+
+        // Charger le filtre des établissements
+        function loadEstablishmentFilter() {
+            const filter = document.getElementById('review-establishment-filter');
+            filter.innerHTML = '<option value="all">Tous les établissements</option>';
+            
+            const uniqueEstablishments = [...new Set(allReviews.map(r => r.establishmentId))];
+            
+            uniqueEstablishments.forEach(estId => {
+                const establishment = establishments[estId];
+                if (establishment) {
+                    const option = document.createElement('option');
+                    option.value = estId;
+                    option.textContent = establishment.name;
+                    filter.appendChild(option);
+                }
+            });
+        }
+
+        // Filtrer les avis
+        function filterReviews() {
+            displayReviews();
+        }
+
+        // Afficher les avis
+        function displayReviews() {
+            const statusFilter = document.getElementById('review-status-filter').value;
+            const establishmentFilter = document.getElementById('review-establishment-filter').value;
+            
+            let filteredReviews = allReviews;
+            
+            if (statusFilter !== 'all') {
+                filteredReviews = filteredReviews.filter(r => r.status === statusFilter);
+            }
+            
+            if (establishmentFilter !== 'all') {
+                filteredReviews = filteredReviews.filter(r => r.establishmentId === establishmentFilter);
+            }
+            
+            const container = document.getElementById('reviews-list');
+            const emptyState = document.getElementById('reviews-empty');
+            
+            if (filteredReviews.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'grid';
+            emptyState.style.display = 'none';
+            
+            container.innerHTML = filteredReviews.map(review => createReviewCard(review)).join('');
+        }
+
+        // Créer une carte d'avis
+        function createReviewCard(review) {
+            const establishment = establishments[review.establishmentId];
+            const establishmentName = establishment ? establishment.name : 'Établissement inconnu';
+            
+            const statusText = {
+                pending: 'En attente',
+                approved: 'Approuvé',
+                rejected: 'Rejeté'
+            };
+            
+            const photos = review.photos && review.photos.length > 0 ? 
+                `<div class="review-photos">
+                    <h5>📸 Photos (${review.photos.length})</h5>
+                    <div class="photos-grid">
+                        ${review.photos.map(photo => 
+                            `<img src="${photo.uploadURL || photo.uri}" class="photo-thumb" onclick="openPhotoModal('${photo.uploadURL || photo.uri}')">`
+                        ).join('')}
+                    </div>
+                </div>` : '';
+            
+            const metadata = review.typeSpecificData ? 
+                `<div class="review-metadata">
+                    ${review.typeSpecificData.roomType ? `<span class="metadata-item">🛏️ ${review.typeSpecificData.roomType}</span>` : ''}
+                    ${review.typeSpecificData.stayDuration ? `<span class="metadata-item">⏱️ ${review.typeSpecificData.stayDuration}</span>` : ''}
+                    ${review.typeSpecificData.travelType ? `<span class="metadata-item">✈️ ${review.typeSpecificData.travelType}</span>` : ''}
+                </div>` : '';
+            
+            const ratingLabels = {
+                location: 'Localisation',
+                service: 'Service',
+                comfort: 'Confort',
+                valueForMoney: 'Qualité/Prix'
+            };
+            
+            return `
+                <div class="review-card ${review.status}">
+                    <div class="review-header">
+                        <div class="review-user">
+                            <div class="user-avatar">
+                                ${(review.userName || 'U')[0].toUpperCase()}
+                            </div>
+                            <div class="review-info">
+                                <h4>${review.userName || 'Utilisateur anonyme'}</h4>
+                                <p>${establishmentName}</p>
+                                <p>${review.createdAt.toLocaleDateString('fr-FR')}</p>
+                            </div>
+                        </div>
+                        <span class="review-status ${review.status}">
+                            ${statusText[review.status]}
+                        </span>
+                    </div>
+                    
+                    <div class="review-rating">
+                        <div class="global-rating">
+                            ${review.globalRating}/10 ⭐
+                        </div>
+                    </div>
+                    
+                    <div class="detailed-ratings">
+                        ${Object.entries(review.ratings || {}).map(([key, rating]) => 
+                            `<div class="rating-item">
+                                <span>${ratingLabels[key] || key}</span>
+                                <span>${rating}/10</span>
+                            </div>`
+                        ).join('')}
+                    </div>
+                    
+                    <div class="review-comment">
+                        ${review.comment}
+                    </div>
+                    
+                    ${photos}
+                    ${metadata}
+                    
+                    <div class="review-actions">
+                        ${review.status === 'pending' ? `
+                            <button class="btn-approve" onclick="moderateReview('${review.id}', 'approved')">
+                                ✅ Approuver
+                            </button>
+                            <button class="btn-reject" onclick="moderateReview('${review.id}', 'rejected')">
+                                ❌ Rejeter
+                            </button>
+                        ` : ''}
+                        <button class="btn-view" onclick="viewReviewDetails('${review.id}')">
+                            👁️ Détails
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Modérer un avis
+        async function moderateReview(reviewId, newStatus) {
+            if (!confirm(`Êtes-vous sûr de vouloir ${newStatus === 'approved' ? 'approuver' : 'rejeter'} cet avis ?`)) {
+                return;
+            }
+            
+            try {
+                await db.collection('reviews').doc(reviewId).update({
+                    status: newStatus,
+                    moderatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    moderatedBy: 'admin'
+                });
+                
+                // Mettre à jour localement
+                const review = allReviews.find(r => r.id === reviewId);
+                if (review) {
+                    review.status = newStatus;
+                }
+                
+                updateReviewsStats();
+                displayReviews();
+                
+                showSuccess(`Avis ${newStatus === 'approved' ? 'approuvé' : 'rejeté'} avec succès`);
+            } catch (error) {
+                console.error('Erreur modération:', error);
+                showError('Erreur lors de la modération');
+            }
+        }
+
+        // Voir les détails d'un avis
+        function viewReviewDetails(reviewId) {
+            const review = allReviews.find(r => r.id === reviewId);
+            if (!review) return;
+            
+            const establishment = establishments[review.establishmentId];
+            
+            alert(`
+        Détails de l'avis:
+
+        Utilisateur: ${review.userName || 'Anonyme'}
+        Établissement: ${establishment ? establishment.name : 'Inconnu'}
+        Note globale: ${review.globalRating}/10
+        Date: ${review.createdAt.toLocaleDateString('fr-FR')}
+        Statut: ${review.status}
+
+        Commentaire:
+        ${review.comment}
+
+        Type spécifique:
+        ${review.typeSpecificData ? JSON.stringify(review.typeSpecificData, null, 2) : 'Aucune'}
+            `);
+        }
+
+        // Ouvrir une photo en modal
+        function openPhotoModal(photoUrl) {
+            window.open(photoUrl, '_blank');
+        }
+
+        // ============================================
+        // SCRIPTS MEDIA KIT (existants)
+        // ============================================
+        
+        // Compteurs animés avec animation plus lente
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 4000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current).toLocaleString();
+                }, 16);
+            });
+        }
+
+        // Intersection Observer pour déclencher les animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('#audience');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Smooth scrolling pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Gestion du formulaire avec popup de confirmation
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('https://formsubmit.co/larevuedeshotels@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    body: new FormData(this)
+                });
+                
+                if (response.ok) {
+                    // Afficher la popup de confirmation
+                    document.getElementById('successPopup').style.display = 'flex';
+                    // Reset le formulaire
+                    this.reset();
+                } else {
+                    throw new Error('Erreur d\'envoi');
+                }
+            } catch (error) {
+                alert('Erreur lors de l\'envoi du message. Veuillez réessayer ou nous contacter directement à larevuedeshotels@gmail.com');
+            }
+        });
+
+        // Configuration FormSubmit directe
+        const form = document.getElementById('contactForm');
+        form.action = 'https://formsubmit.co/larevuedeshotels@gmail.com';
+        form.method = 'POST';
+        
+        // Ajout des champs cachés
+        const hiddenFields = [
+            { name: '_subject', value: 'Nouveau message depuis le Media Kit - La Revue des Hotels' },
+            { name: '_captcha', value: 'false' },
+            { name: '_template', value: 'table' }
+        ];
+        
+        hiddenFields.forEach(field => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = field.name;
+            input.value = field.value;
+            form.appendChild(input);
+        });
+    </script>
 </body>
 </html>
