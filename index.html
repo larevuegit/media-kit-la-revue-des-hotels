@@ -423,6 +423,19 @@
         /* SEO ranks dorés */
         .seo-rank{ color:var(--gold) !important; font-family:'Playfair Display', serif; }
 
+        /* Badge de vues (contenus les plus vus) mis en avant */
+        .views-badge{
+            display:inline-flex; align-items:center; gap:.45rem;
+            background:linear-gradient(135deg, var(--navy) 0%, var(--navy-3) 100%);
+            color:#fff; font-family:'Inter', sans-serif; font-weight:600;
+            font-size:.9rem; line-height:1; padding:.5rem .95rem; border-radius:999px;
+            margin-bottom:.75rem; text-decoration:none; border:1px solid rgba(200,162,76,.4);
+            transition:all .25s ease;
+        }
+        .views-badge:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(12,23,48,.22); color:#fff; }
+        .views-badge .num{ color:var(--gold-2); font-weight:800; font-size:.98rem; }
+        .views-badge i{ font-size:1rem; }
+
         /* Harmonisation des utilitaires Tailwind bleus vers navy/or */
         .bg-gray-50{ background-color:#faf9f6 !important; }
         .bg-blue-50{ background-color:var(--cream) !important; }
@@ -813,7 +826,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="text-sm text-gray-600 mb-3 large-text">Collaboration fructueuse avec impact mesurable.</p>
+                    <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="views-badge"><i class="fab fa-tiktok"></i> <span class="num">248K vues</span> · TikTok</a>
+                    <p class="text-sm text-gray-600 mb-3 large-text">Collaboration fructueuse avec un impact mesurable et une vidéo devenue virale.</p>
                     <a href="https://www.tiktok.com/@larevuedeshotels/video/7516131678243409174" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
                 </div>
                 
@@ -828,8 +842,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="text-sm text-green-600 mb-2 font-semibold">Plus de 170K vues sur TikTok</p>
-                    <p class="text-sm text-gray-600 mb-3 large-text">Succès viral international avec retombées exceptionnelles.</p>
+                    <a href="https://www.tiktok.com/@larevuedeshotels/video/7491294774830419222" target="_blank" class="views-badge"><i class="fab fa-tiktok"></i> <span class="num">191K vues</span> · TikTok</a>
+                    <p class="text-sm text-gray-600 mb-3 large-text">Succès viral international avec des retombées exceptionnelles.</p>
                     <a href="https://www.tiktok.com/@larevuedeshotels/video/7491294774830419222" target="_blank" class="text-blue-600 hover:underline">Voir la vidéo TikTok</a>
                 </div>
 
@@ -844,9 +858,11 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
+                    <a href="https://www.instagram.com/p/DYPsyGBMH8y/" target="_blank" class="views-badge"><i class="fab fa-instagram"></i> <span class="num">59,5K vues</span> · Instagram</a>
                     <p class="text-sm text-green-600 mb-2 font-semibold">Notre avis référencé avant Expedia sur Google</p>
                     <p class="text-sm text-gray-600 mb-3 large-text">Notre avis complet sur ce 5 étoiles tropézien : design épuré, piscine turquoise et table étoilée à deux pas de la plage.</p>
-                    <a href="https://larevuedeshotels.com/notre-avis-complet-hotel-sezz-saint-tropez" target="_blank" class="text-blue-600 hover:underline">Lire l'article</a>
+                    <a href="https://larevuedeshotels.com/notre-avis-complet-hotel-sezz-saint-tropez" target="_blank" class="text-blue-600 hover:underline mr-3">Lire l'article</a>
+                    <a href="https://www.instagram.com/p/DYPsyGBMH8y/" target="_blank" class="text-blue-600 hover:underline">Voir le reel</a>
                 </div>
 
                 <div class="testimonial-card hover-scale">
