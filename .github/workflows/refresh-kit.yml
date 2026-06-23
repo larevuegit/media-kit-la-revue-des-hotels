@@ -1,0 +1,13 @@
+name: Refresh kitmediaLRDH cache
+on:
+  page_build:
+  workflow_dispatch:
+permissions: {}
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping WordPress to refresh the /kitmediaLRDH cache
+        run: |
+          sleep 25
+          curl -fsS "https://larevuedeshotels.com/?kitrefresh=${{ secrets.KIT_REFRESH_TOKEN }}" && echo " OK"
