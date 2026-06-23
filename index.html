@@ -511,9 +511,9 @@
     <section id="sponsorise" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <span class="eyebrow">Offre phare</span>
-            <h2 class="section-title">Commandez votre article sponsorisé</h2>
+            <h2 class="section-title">Commandez votre article ou votre post sponsorisé</h2>
             <hr class="gold-rule">
-            <p class="section-subtitle">Un article premium rédigé par notre rédaction, optimisé SEO et publié à vie sur larevuedeshotels.com. Sujet validé par notre IA, puis paiement sécurisé en ligne.</p>
+            <p class="section-subtitle">Un article premium publié à vie sur larevuedeshotels.com, ou un post sur nos réseaux (Instagram, TikTok, LinkedIn). Sujet validé par notre IA, puis paiement sécurisé en ligne.</p>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
                 <div class="service-card">
                     <h3 class="text-2xl font-bold mb-5">Ce que comprend l'offre</h3>
@@ -530,6 +530,9 @@
                         <div class="flex justify-between py-3"><span class="text-gray-700">+ 2 mois « Zoom sur »</span><span class="font-bold" style="font-family:'Playfair Display',serif; color:var(--navy)">2 300 €</span></div>
                         <div class="flex justify-between py-3"><span class="text-gray-700">+ 3 mois « Zoom sur »</span><span class="font-bold" style="font-family:'Playfair Display',serif; color:var(--navy)">3 000 €</span></div>
                         <div class="flex justify-between py-3"><span class="text-gray-700">+ 5 mois « Zoom sur »</span><span class="font-bold" style="font-family:'Playfair Display',serif; color:var(--navy)">5 300 €</span></div>
+                        <div class="flex justify-between py-3"><span class="text-gray-700">Post Instagram · visuels + stories</span><span class="font-bold" style="font-family:'Playfair Display',serif; color:var(--navy)">500 €</span></div>
+                        <div class="flex justify-between py-3"><span class="text-gray-700">Vidéo TikTok · montage pro</span><span class="font-bold" style="font-family:'Playfair Display',serif; color:var(--navy)">750 €</span></div>
+                        <div class="flex justify-between py-3"><span class="text-gray-700">Post LinkedIn · B2B</span><span class="font-bold" style="font-family:'Playfair Display',serif; color:var(--navy)">290 €</span></div>
                     </div>
                 </div>
                 <div class="bg-white border-2 border-gray-200 rounded-lg p-8">
@@ -552,8 +555,9 @@
                             <div class="form-group"><label class="form-label">Téléphone</label><input type="tel" name="telephone" class="form-input" placeholder="Optionnel"></div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Sujet / angle souhaité de l'article *</label>
-                            <textarea name="sujet" class="form-input" rows="4" placeholder="Ex. : ouverture de notre nouveau spa, rénovation des suites, table signature du chef..." required></textarea>
+                            <label class="form-label">Sujet de l'article · ou texte du post réseaux *</label>
+                            <textarea name="sujet" class="form-input" rows="4" placeholder="Article : l'angle souhaité (ouverture d'un spa, rénovation des suites, table du chef...). Post Instagram / TikTok / LinkedIn : le texte exact que vous voulez voir publié." required></textarea>
+                            <p class="text-xs text-gray-500 mt-2"><i class="fas fa-paperclip"></i> Pour un post réseaux, indiquez ici le texte à publier. Après paiement, nous vous recontactons par email pour récupérer les médias (photos / vidéos) que vous souhaitez que nous postions.</p>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Formule *</label>
@@ -563,6 +567,9 @@
                                 <option value="Article + 2 mois Zoom sur" data-total="2 300 €">Article + 2 mois « Zoom sur » — 2 300 €</option>
                                 <option value="Article + 3 mois Zoom sur" data-total="3 000 €">Article + 3 mois « Zoom sur » — 3 000 €</option>
                                 <option value="Article + 5 mois Zoom sur" data-total="5 300 €">Article + 5 mois « Zoom sur » — 5 300 €</option>
+                                <option value="Post Instagram" data-total="500 €">Post Instagram · visuels + stories — 500 €</option>
+                                <option value="Vidéo TikTok" data-total="750 €">Vidéo TikTok · montage pro — 750 €</option>
+                                <option value="Post LinkedIn" data-total="290 €">Post LinkedIn · B2B — 290 €</option>
                             </select>
                         </div>
                         <div class="flex items-center justify-between rounded-lg px-5 py-4" style="background:var(--gold-soft)">
@@ -769,49 +776,7 @@
                 </div>
             </div>
             
-            <div class="package-card hover-scale">
-                <i class="fas fa-star text-5xl mb-6"></i>
-                <h3 class="text-3xl font-bold mb-6">Package Complet Premium</h3>
-                <p class="text-xl mb-6">La solution tout-en-un pour une visibilité maximale sur tous nos canaux</p>
-                
-                <div class="package-details">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                        <div>
-                            <div class="package-item">
-                                <i class="fas fa-newspaper"></i>
-                                <span>Article complet sur notre site web</span>
-                            </div>
-                            <div class="package-item">
-                                <i class="fab fa-instagram"></i>
-                                <span>Post Instagram avec stories</span>
-                            </div>
-                            <div class="package-item">
-                                <i class="fab fa-tiktok"></i>
-                                <span>Vidéo TikTok professionnelle</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="package-item">
-                                <i class="fab fa-linkedin"></i>
-                                <span>Publication LinkedIn B2B</span>
-                            </div>
-                            <div class="package-item">
-                                <i class="fab fa-twitter"></i>
-                                <span>Posts sur X (Twitter)</span>
-                            </div>
-                            <div class="package-item">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Rapport de performance détaillé</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-5xl font-bold mt-8">1 000€</div>
-                <p class="text-lg mt-4 opacity-90">Économisez 43% par rapport aux services individuels</p>
-            </div>
-
- 
+        </div>
     </section>
 
     <!-- Témoignages -->
@@ -1251,7 +1216,7 @@
         if(sel&&totalLabel){ function upd(){ totalLabel.textContent=sel.options[sel.selectedIndex].getAttribute("data-total"); } sel.addEventListener("change",upd); upd(); }
         var params=new URLSearchParams(location.search), st=params.get("sponso"), box=document.getElementById("sponsoAlert");
         function show(h,c,bg,bd){ if(!box)return; box.innerHTML=h; box.style.cssText="display:block;border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:14px;line-height:1.5;color:"+c+";background:"+bg+";border:1px solid "+bd; }
-        if(st==="paid"){ var p=document.getElementById("successPopup"); if(p)p.style.display="flex"; show("✅ <strong>Paiement reçu, merci !</strong> Votre article sponsorisé est en production · notre rédaction vous recontacte sous 48h.","#1f5a1f","#edf7ed","#bfe0bf"); }
+        if(st==="paid"){ var p=document.getElementById("successPopup"); if(p)p.style.display="flex"; show("✅ <strong>Paiement reçu, merci !</strong> Votre commande est en production · notre rédaction vous recontacte sous 48h.","#1f5a1f","#edf7ed","#bfe0bf"); }
         else if(st==="canceled"){ show("Paiement annulé. Vous pouvez relancer la commande ci-dessous quand vous voulez.","#7a5b00","#fff8e6","#f0e0b0"); }
         else if(st==="rejected"){ show("⚠️ <strong>Sujet non accepté.</strong> "+(params.get("reason")?decodeURIComponent(params.get("reason")):"La Revue des Hôtels publie uniquement des sujets liés à l'hôtellerie de luxe.")+" Modifiez votre sujet puis réessayez.","#8a1f1f","#fdecea","#f5c6c2"); }
         else if(st==="error"){ show((params.get("reason")?decodeURIComponent(params.get("reason")):"Une erreur est survenue, réessayez."),"#8a1f1f","#fdecea","#f5c6c2"); }
