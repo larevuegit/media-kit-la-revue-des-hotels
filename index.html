@@ -110,7 +110,7 @@
         .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(11,20,40,.72);border-bottom:1px solid var(--line)}
         .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
         .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-        .brand img{width:40px;height:40px;border-radius:10px;object-fit:cover;border:1px solid var(--line-2)}
+        .brand .mono{width:42px;height:42px;flex:none}
         .brand b{font-family:var(--serif);font-size:1.05rem;letter-spacing:0;color:#fff;display:block;line-height:1.1}
         .brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
         .nav-links{display:flex;gap:26px;align-items:center}
@@ -157,7 +157,7 @@
         .offer::after{content:"";position:absolute;inset:auto -40% -60% auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(200,162,76,.22),transparent 65%);pointer-events:none}
         .offer .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
         .offer .price{font-family:var(--serif);font-size:2.4rem;font-weight:800;color:#fff;line-height:1}
-        .offer .price small{font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:500;margin-left:6px}
+        .offer .price small{display:block;font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:500;margin-top:6px;letter-spacing:.01em}
         .offer ul{margin:4px 0 0;padding:0;list-style:none;color:#cfd6e2;font-size:14.5px;display:grid;gap:8px}
         .offer li{display:flex;gap:10px}
         .offer li::before{content:"◆";color:var(--gold);font-size:9px;margin-top:6px}
@@ -219,6 +219,12 @@
 
         /* Portes d'entrée */
         .doors .door{padding:28px 26px}
+        .langs{margin-top:34px;padding:26px 28px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+        .langs .flags{display:flex;gap:8px;flex-wrap:wrap;max-width:190px}
+        .langs .flags span{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:15px;color:var(--gold-2);background:rgba(255,255,255,.05);border:1px solid var(--line-2)}
+        .langs .k{font-family:var(--serif);font-size:1.4rem;color:#fff;margin-bottom:6px}
+        .langs p{color:#cfd6e2;font-size:15px;margin:0}
+        @media (max-width:820px){.langs{grid-template-columns:1fr}.langs .flags{max-width:none}}
         .door .k{font-family:var(--serif);font-size:1.4rem;color:#fff;margin-bottom:8px}
         .door p{color:#cfd6e2;font-size:15px;margin:0}
         .rank{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 0}
@@ -300,7 +306,7 @@
 <nav class="nav" aria-label="Navigation principale">
     <div class="wrap">
         <a class="brand" href="https://larevuedeshotels.com" target="_blank" rel="noopener">
-            <img src="https://larevuedeshotels.com/wp-content/uploads/2024/01/AVIS-DES-HOTELS-DE-LUXE-LA-REVUE-DES-HOTELS-INFLUENCEUR-HOTELS-INFLUENCEUR-VOYAGE.png" alt="La Revue des Hôtels" width="40" height="40">
+            <svg class="mono" viewBox="0 0 44 44" width="42" height="42" aria-hidden="true"><rect x="1" y="1" width="42" height="42" rx="11" fill="rgba(255,255,255,.05)" stroke="#c8a24c" stroke-width="1.2"/><text x="22" y="19.5" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="700" font-size="13.5" fill="#ffffff" letter-spacing="1.5">LR</text><text x="22" y="34.5" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="700" font-size="13.5" fill="#ffffff" letter-spacing="1.5">DH</text></svg>
             <span><b>La Revue des Hôtels</b><small>Kit média 2026</small></span>
         </a>
         <div class="nav-links">
@@ -328,7 +334,7 @@
         <div>
             <span class="eyebrow">Kit média 2026 · Partenariats</span>
             <h1 style="margin-top:18px">Le premier média de <span class="or">l’hôtellerie de luxe</span> en France</h1>
-            <p class="sub">Depuis 2012, La Revue des Hôtels est la référence des amateurs d’hôtels d’exception. Plus de 215 000 abonnés qualifiés, une audience qui réserve, et des articles qui restent en ligne à vie. Réservez votre visibilité en quelques minutes, paiement sécurisé.</p>
+            <p class="sub">Depuis 2012, La Revue des Hôtels est la référence des amateurs d’hôtels d’exception. Plus de 215 000 abonnés qualifiés, une audience qui réserve, et des articles qui restent en ligne à vie, publiés en cinq langues. Réservez votre visibilité en quelques minutes, paiement sécurisé.</p>
             <div class="cta-row">
                 <a class="btn btn-gold" href="#sponsorise">Publier sur La Revue des Hôtels</a>
                 <a class="btn btn-ghost" href="#audience">Voir l’audience</a>
@@ -360,6 +366,7 @@
                     <li>Article complet rédigé par la rédaction, optimisé SEO</li>
                     <li>Vos photos intégrées, lien vers votre site</li>
                     <li>Relais sur nos réseaux</li>
+                    <li>Traduit en cinq langues : français, anglais, espagnol, allemand, portugais</li>
                     <li>Bénéfice de notre autorité SEO et de notre présence dans les réponses des IA</li>
                 </ul>
             </article>
@@ -500,8 +507,7 @@
                 <div class="counter num" data-target="15648">15 648</div>
                 <div class="lbl">Abonnés LinkedIn</div>
                 <div class="src">285 118 impressions · +1 603 % sur 28 jours<br>Source : LinkedIn Analytics</div>
-                <img class="proof" loading="lazy" decoding="async" src="https://larevuedeshotels.com/wp-content/uploads/2026/06/linkedin-performance-contenu-285118-impressions-1603-la-revue-des-hotels.png" alt="LinkedIn Analytics : 285 118 impressions, +1 603 % sur 28 jours">
-                <a class="visit" href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B4tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" rel="noopener">Voir le compte</a>
+                <span style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center"><a class="visit" data-proof href="https://larevuedeshotels.com/wp-content/uploads/2026/06/linkedin-performance-contenu-285118-impressions-1603-la-revue-des-hotels.png" data-alt="LinkedIn Analytics : 285 118 impressions, +1 603 % sur 28 jours">Voir la preuve</a><a class="visit" href="https://www.linkedin.com/in/la-revue-des-h%C3%B4tels-magazine-h%C3%B4tels-de-luxe-actualit%C3%A9-hotels-643602182/" target="_blank" rel="noopener">Voir le compte</a></span>
             </div>
             <div class="stat glass tilt reveal">
                 <div class="ico"><svg viewBox="0 0 24 24" fill="#e9cf8a"><path d="M17.5 3h3l-7 8 8.2 10h-6.4l-5-6.5L4.6 21h-3l7.5-8.6L1.3 3h6.5l4.5 6z"/></svg></div>
@@ -512,7 +518,7 @@
         </div>
 
         <div class="wide-proof glass reveal">
-            <img loading="lazy" decoding="async" class="proof" style="max-width:none;cursor:zoom-in" src="https://larevuedeshotels.com/wp-content/uploads/2026/09/kit-media-google-search-console-1-43-million-impressions-la-revue-des-hotels.png.webp" alt="Google Search Console de La Revue des Hôtels : 1 431 125 impressions et 29 360 clics du 17 août au 12 septembre 2026">
+            <img loading="lazy" decoding="async" class="proof" style="max-width:none;cursor:zoom-in" src="https://larevuedeshotels.com/wp-content/uploads/2026/09/kit-media-google-search-console-1-43-million-impressions-27-jours-la-revue-des-hotels.png.webp" alt="Google Search Console de La Revue des Hôtels : 1 431 125 impressions et 29 360 clics au total sur 27 jours, du 17 août au 12 septembre 2026, avec le détail par jour">
             <div>
                 <span class="eyebrow">Site web · Google Search Console</span>
                 <div class="counter num" data-target="1431125" style="margin-top:12px">1 431 125</div>
@@ -535,14 +541,22 @@
         <h2 class="reveal">Une recherche d’hôtel ne commence plus seulement sur Google</h2>
         <p class="sub reveal">Nous occupons les trois portes d’entrée : les résultats classiques, l’onglet Actualités, et les réponses rédigées par les assistants IA.</p>
 
-        <div class="grid g3" style="margin-top:38px">
+        <div class="langs glass reveal">
+            <div class="flags" aria-hidden="true"><span>FR</span><span>EN</span><span>ES</span><span>DE</span><span>PT</span></div>
+            <div>
+                <div class="k">Cinq langues, une seule commande</div>
+                <p>Chaque article est publié en français, en anglais, en espagnol, en allemand et en portugais, et référencé dans Google Actualités dans chacune de ces langues. Votre établissement est lu par des voyageurs du monde entier, pas seulement en France.</p>
+            </div>
+        </div>
+
+        <div class="grid g3" style="margin-top:22px">
             <div class="door glass tilt reveal">
                 <div class="k lift">Recherche Google</div>
                 <p class="lift">Première position sur « magazine hôtels » et « magazine hôtels de luxe ». 1,43 million d’impressions et 29 360 clics mesurés sur 27 jours, avec des impressions qui ont doublé sur la période.</p>
             </div>
             <div class="door glass tilt reveal">
                 <div class="k lift">Google Actualités</div>
-                <p class="lift">Nos articles sont repris dans l’onglet Actualités de Google, aux côtés de la presse généraliste. Une ouverture publiée chez nous apparaît dans les résultats d’actualité le jour même.</p>
+                <p class="lift">Nos articles sont repris dans l’onglet Actualités de Google, aux côtés de la presse généraliste, dans les cinq langues du site. Une ouverture publiée chez nous apparaît dans les résultats d’actualité le jour même.</p>
             </div>
             <div class="door glass tilt reveal">
                 <div class="k lift">Assistants conversationnels</div>
@@ -586,7 +600,7 @@
                 <div class="bd"><b>Hôtel Palafitte</b><small>Neuchâtel, Suisse</small><span class="metric num">191 K vues <em>· TikTok</em></span><p>Succès viral international, avec des retombées exceptionnelles.</p><a class="more" href="https://www.tiktok.com/@larevuedeshotels/video/7491294774830419222" target="_blank" rel="noopener">Voir la vidéo</a></div>
             </article>
             <article class="ref tilt reveal">
-                <div class="ph"><img loading="lazy" decoding="async" src="https://larevuedeshotels.com/wp-content/uploads/2026/05/piscine-exterieure-chauffee-palmiers-hotel-sezz-saint-tropez-avis-complet-actualites-hotels-la-revue-des-hotels.jpg" alt="Hôtel Sezz Saint-Tropez, piscine"></div>
+                <div class="ph"><img loading="lazy" decoding="async" src="https://larevuedeshotels.com/wp-content/uploads/2026/05/piscine-exterieure-chauffee-palmiers-hotel-sezz-saint-tropez-avis-complet-actualites-hotels-actualites-hotellerie-13.jpg" alt="Hôtel Sezz Saint-Tropez, piscine"></div>
                 <div class="bd"><b>Hôtel Sezz Saint-Tropez</b><small>Saint-Tropez · notre avis référencé avant Expedia sur Google</small><span class="metric num">59,5 K vues <em>· Instagram</em></span><p>Notre avis complet sur ce 5 étoiles tropézien : design épuré, piscine turquoise et table étoilée à deux pas de la plage.</p><span style="display:flex;gap:16px;flex-wrap:wrap"><a class="more" href="https://larevuedeshotels.com/notre-avis-complet-hotel-sezz-saint-tropez" target="_blank" rel="noopener">Lire l’article</a><a class="more" href="https://www.instagram.com/p/DYPsyGBMH8y/" target="_blank" rel="noopener">Voir le reel</a></span></div>
             </article>
             <article class="ref tilt reveal">
@@ -598,7 +612,7 @@
                 <div class="bd"><b>Monte-Carlo Bay Hotel &amp; Resort</b><small>Monaco · SBM</small><p style="margin-top:8px">Notre test du resort SBM et de son lagon d’eau de mer sablonneux, à la pointe Saint-Roman.</p><a class="more" href="https://larevuedeshotels.com/lactualite-des-hotels-a-monaco/test-monte-carlo-bay-hotel-resort-sbm-lagon-pointe-saint-roman" target="_blank" rel="noopener">Lire l’article</a></div>
             </article>
             <article class="ref tilt reveal">
-                <div class="ph"><img loading="lazy" decoding="async" src="https://larevuedeshotels.com/wp-content/uploads/2026/03/On-a-teste-lhotel-du-Rond-Point-des-Champs-Elysees-a-Paris-toutes-les-infos-et-notre-avis-complet.jpg" alt="Hôtel du Rond-Point, Paris"></div>
+                <div class="ph"><img loading="lazy" decoding="async" src="https://larevuedeshotels.com/wp-content/uploads/2026/03/On-a-teste-lhotel-du-Rond-Point-des-Champs-Elysees-a-Paris-toutes-les-infos-et-notre-avis-complet_HotelRondPoint_Piscine_actualites-des-hotels-hotellerie-de-luxe-scaled.jpg" alt="Hôtel du Rond-Point, Paris"></div>
                 <div class="bd"><b>Hôtel du Rond-Point</b><small>Paris · Champs-Élysées</small><p style="margin-top:8px">On a testé ce boutique-hôtel à deux pas des Champs-Élysées : toutes les infos et notre avis complet.</p><a class="more" href="https://larevuedeshotels.com/on-a-teste-lhotel-du-rond-point-des-champs-elysees-a-paris-toutes-les-infos-et-notre-avis-complet" target="_blank" rel="noopener">Lire l’article</a></div>
             </article>
         </div>
@@ -778,6 +792,7 @@
     /* ── Lightbox des preuves ── */
     var lb = document.getElementById('lightbox'), lbi = lb ? lb.querySelector('img') : null;
     document.querySelectorAll('img.proof').forEach(function(im){ im.addEventListener('click', function(){ if(!lb) return; lbi.src = im.src; lbi.alt = im.alt; lb.style.display='flex'; lb.setAttribute('aria-hidden','false'); }); });
+    document.querySelectorAll('a[data-proof]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); if(!lb) return; lbi.src = a.getAttribute('href'); lbi.alt = a.getAttribute('data-alt') || ''; lb.style.display='flex'; lb.setAttribute('aria-hidden','false'); }); });
     if(lb){ lb.addEventListener('click', function(){ lb.style.display='none'; lb.setAttribute('aria-hidden','true'); }); document.addEventListener('keydown', function(e){ if(e.key==='Escape') lb.style.display='none'; }); }
 
     /* ── Défilement doux des ancres ── */
