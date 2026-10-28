@@ -171,6 +171,23 @@
         .zoom-table td{padding:13px 0;border-bottom:1px solid var(--line)}
         .zoom-table td:last-child{text-align:right;font-family:var(--serif);font-weight:700;font-size:1.15rem;color:#fff;white-space:nowrap}
         .zoom-table tr:last-child td{border-bottom:0}
+        .partner{margin-top:26px;padding:30px;display:grid;grid-template-columns:1fr 1.05fr;gap:30px;align-items:center}
+        .partner .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+        .partner h3{font-family:var(--serif);font-size:1.7rem;color:#fff;margin:10px 0 8px;line-height:1.2}
+        .partner p{color:var(--muted);margin:0 0 14px;line-height:1.6}
+        .partner ul{margin:0 0 18px;padding-left:18px;color:#dfe5ef;line-height:1.7}
+        .partner .prices{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:20px}
+        .partner .prices div{font-family:var(--serif);font-size:2rem;font-weight:800;color:#fff;line-height:1}
+        .partner .prices small{display:block;font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:500;margin-top:6px}
+        .partner .demo{border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#071a33,#0d3355 60%,#11476e);display:flex;flex-wrap:wrap;box-shadow:0 18px 40px rgba(0,0,0,.4);min-width:0}
+        .partner .demo .ph{flex:1 1 180px;min-height:190px;background-size:cover;background-position:center}
+        .partner .demo .tx{flex:1.3 1 200px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+        .partner .demo .k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#d8b768;font-weight:700}
+        .partner .demo .logo{font-family:var(--serif);font-size:1.5rem;color:#fff;font-style:italic}
+        .partner .demo .t{font-family:var(--serif);font-size:1.05rem;color:#fff;line-height:1.3}
+        .partner .demo .b{align-self:flex-start;background:#d8b768;color:#071a33;font-weight:700;font-size:12.5px;padding:8px 15px;border-radius:999px}
+        .partner .cap{grid-column:1/-1;font-size:12.5px;color:var(--muted);margin:0}
+        @media (max-width:860px){.partner{grid-template-columns:1fr;padding:22px}}
 
         /* Commande */
         .order{background:var(--cream);color:var(--ink)}
@@ -458,6 +475,22 @@
                     <tr><td>Artículo + 5 meses «Enfoque en»</td><td class="num">5 300 €</td></tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="partner glass reveal" id="partenaire">
+            <div>
+                <span class="tag">Novedad · Espacio permanente</span>
+                <h3>El espacio Partner</h3>
+                <p>Su marca presente de forma continua en todos nuestros artículos de su sector (spas, piscinas, gastronomía, diseño, movilidad…), en nuestros cinco idiomas.</p>
+                <ul><li>Espacio con sus colores: foto, logotipo, una frase y un botón hacia su web</li><li>Integrado en los artículos de su temática, en ordenador y móvil</li><li>Mención «Partner» visible y enlace declarado como patrocinado, conformes a la ley y a las reglas de Google</li><li>Nunca dentro de nuestras pruebas de hoteles: nuestras notas siguen siendo independientes</li></ul>
+                <div class="prices"><div>490 € + IVA<small>al mes · 3 meses mínimo</small></div><div>4 900 € + IVA<small>al año · 2 posts en LinkedIn y una mención en la newsletter incluidos</small></div></div>
+                <a class="btn btn-gold" href="#contact" onclick="var m=document.getElementById('c-msg');if(m&&!m.value)m.value='Hola, deseo reservar el espacio Partner permanente (temática: ...).';">Solicitar este espacio</a>
+            </div>
+            <div class="demo" aria-hidden="true">
+                <div class="ph" style="background-image:url('https://res.cloudinary.com/a32oi5zi/image/upload/f_auto,q_auto,w_900,h_900,c_limit/v1792096544/lrdh/articles/la-ferme-d-augustin-piscine-soleil-transats-rayes.jpg')"></div>
+                <div class="tx"><span class="k">Partner · Piscinas y spas</span><span class="logo">Su marca</span><span class="t">Su frase gancho, aquí, bajo su logotipo.</span><span class="b">Descubrir →</span></div>
+            </div>
+            <p class="cap">Vista previa del espacio tal como aparece en un artículo.</p>
         </div>
     </div>
 </section>
